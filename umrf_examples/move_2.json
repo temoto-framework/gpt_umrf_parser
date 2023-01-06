@@ -1,0 +1,18 @@
+{
+	"graph_name": "Go to the workshop",
+	"umrf_actions": [
+			{
+					"name": "navigation",
+					"description": "Go to the workshop.",
+					"id": 0,
+					"input_parameters": {
+							"location": {
+									"label": {
+											"pvf_type": "string",
+											"pvf_value": "workshop"
+									}
+							}
+					}
+			}
+	]
+}
