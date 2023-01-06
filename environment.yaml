@@ -1,0 +1,9 @@
+name: hard-prompting
+channels:
+    - defaults
+    - pytorch
+    - conda-forge
+dependencies:
+    - pytorch==1.12.1
+    - torchvision==0.13.1
+    - cudatoolkit=11.6 
