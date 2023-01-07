@@ -13,7 +13,6 @@ def check_for_gpu() -> str:
         device = 'cpu'
     return device
 
-
 def create_prompt(nl_instruction:str, image_data: str, umrf_exs: list) -> str:
     raise NotImplementedError
 
