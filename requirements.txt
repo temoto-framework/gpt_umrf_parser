@@ -3,3 +3,4 @@ networkx
 line_profiler
 tensorboard
 glob2
+transformers
