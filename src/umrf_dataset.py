@@ -23,17 +23,17 @@ class UMRF(Dataset):
     Provide an index for a UMRF example and get in return:
     
     + Natural Language Instruction (string)
-    + Image Data (coordinate information as a list of json strings in the Pose2D format)
+    + Image Data (coordinate information as a string of Pose2D coords)
     + UMRF Graph (the ground truth label/ decoding)
     """
     def __getitem__(self, idx):
         umrf_ex_path = self.all_umrf_examples_path[idx]
         umrf = self.path_to_umrf(umrf_ex_path)
 
-        nl_instruction = umrf['graph_description']
+        nl_instruction = str(umrf['graph_description'])
         image_data = self.get_image_data(umrf)
 
-        return nl_instruction, image_data, umrf
+        return nl_instruction, image_data, str(umrf)
 
 
     def path_to_umrf(self, path):
@@ -50,9 +50,10 @@ class UMRF(Dataset):
         coordinate_data = []
         for action in umrf_actions:
             try:
-                coordinate_data.append(action['input_parameters']['pose_2d'])
+                coordinate_data.append(str(action['input_parameters']['pose_2d']))
             except:
-                coordinate_data.append('')
+                pass
+        "".join(coordinate_data)
         return coordinate_data
     
 
