@@ -53,8 +53,8 @@ class UMRF(Dataset):
                 coordinate_data.append(str(action['input_parameters']['pose_2d']))
             except:
                 pass
-        "".join(coordinate_data)
-        return coordinate_data
+        img_str = "".join(coordinate_data)
+        return img_str
     
 
 if __name__ == '__main__':

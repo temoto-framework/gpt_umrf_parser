@@ -1,14 +1,21 @@
+from torch.utils.data import Dataset, DataLoader
 
-class JiangPrompt():
-    def __init__(self, input_information: tuple[str, str, str]):
-        self.input_information = input_information
-    
+
+"""
+This class will be responsible for defining reward metrics and
+different search methods resembling those outlined in (Jiang2020c)
+to find optimal discrete prompt
+"""
+class JiangPrompt:
+    def __init__(self):
+        raise NotImplementedError
+
     """
     Calculates the character-level accuracy for a single
     UMRF ground-truth against a single UMRF model decoding
     """
-    def acc(self, model_output:str):
-        ground_truth = self.input_information[2].lower()
+    def acc(self, input_information:str, model_output:str):
+        ground_truth = input_information[2].lower()
         model_output = model_output.lower()
 
         penalize_extra_decodings = len(model_output) - len(ground_truth)
