@@ -12,11 +12,11 @@ UMRF parses.
 """
 class UMRF(Dataset):
 
-    def __init__(self, data_path):
+    def __init__(self, data_path: str):
         self.umrf_data_path = data_path
         self.all_umrf_examples_path = sorted(glob.glob(data_path))
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.all_umrf_examples_path)
     
     """
@@ -26,7 +26,7 @@ class UMRF(Dataset):
     + Image Data (coordinate information as a string of Pose2D coords)
     + UMRF Graph (the ground truth label/ decoding)
     """
-    def __getitem__(self, idx):
+    def __getitem__(self, idx: int) -> tuple[str, str, str]:
         umrf_ex_path = self.all_umrf_examples_path[idx]
         umrf = self.path_to_umrf(umrf_ex_path)
 
@@ -36,7 +36,7 @@ class UMRF(Dataset):
         return nl_instruction, image_data, str(umrf)
 
 
-    def path_to_umrf(self, path):
+    def path_to_umrf(self, path: str) -> json:
         with open(path, 'r') as f:
             json_string = f.read()
             json_dict = json.loads(json_string)
@@ -45,7 +45,7 @@ class UMRF(Dataset):
         return json_dict
 
 
-    def get_image_data(self, umrf):
+    def get_image_data(self, umrf: json) -> str:
         umrf_actions = umrf['umrf_actions']
         coordinate_data = []
         for action in umrf_actions:
