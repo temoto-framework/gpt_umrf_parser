@@ -1,0 +1,63 @@
+import os
+import glob2 as glob
+
+import json
+
+from torch.utils.data import Dataset, DataLoader
+
+"""
+This class is used to manage access to the supervised UMRF examples. These examples were
+developed by taking the natural language (NL) instructions used in ALFRED and developing
+UMRF parses.
+"""
+class UMRF(Dataset):
+
+    def __init__(self, data_path):
+        self.umrf_data_path = data_path
+        self.all_umrf_examples_path = sorted(glob.glob(data_path))
+
+    def __len__(self):
+        return len(self.all_umrf_examples_path)
+    
+    """
+    Provide an index for a UMRF example and get in return:
+    
+    + Natural Language Instruction (string)
+    + Image Data (coordinate information as a list of json strings in the Pose2D format)
+    + UMRF Graph (the ground truth label/ decoding)
+    """
+    def __getitem__(self, idx):
+        umrf_ex_path = self.all_umrf_examples_path[idx]
+        umrf = self.path_to_umrf(umrf_ex_path)
+
+        nl_instruction = umrf['graph_description']
+        image_data = self.get_image_data(umrf)
+
+        return nl_instruction, image_data, umrf
+
+
+    def path_to_umrf(self, path):
+        with open(path, 'r') as f:
+            json_string = f.read()
+            json_dict = json.loads(json_string)
+            del json_dict['graph_name']
+            del json_dict['graph_state']
+        return json_dict
+
+
+    def get_image_data(self, umrf):
+        umrf_actions = umrf['umrf_actions']
+        coordinate_data = []
+        for action in umrf_actions:
+            try:
+                coordinate_data.append(action['input_parameters']['pose_2d'])
+            except:
+                coordinate_data.append('')
+        return coordinate_data
+    
+
+if __name__ == '__main__':
+    umrf_data_path = os.getcwd() + '/umrf_data/*'
+    print(umrf_data_path)
+    dataset = UMRF(umrf_data_path)
+    print(dataset[0])

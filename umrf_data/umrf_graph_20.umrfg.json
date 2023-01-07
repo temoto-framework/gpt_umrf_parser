@@ -1,0 +1,34 @@
+{
+    "graph_name": "umrf_graph_20",
+    "graph_description": "walk to face the night stand on the right of the bed",
+    "graph_state": 1,
+    "umrf_actions": [
+        {
+            "name": "TaNavigateRobot",
+            "package_name": "ta_navigate_robot",
+            "description": "walk",
+            "id": 0,
+            "effect": "synchronous",
+            "input_parameters": {
+                "verb": {
+                    "pvf_type": "string",
+                    "pvf_example": "walk"
+                },
+                "pose_2d": {
+                    "x": {
+                        "pvf_type": "number",
+                        "pvf_value": 0.248
+                    },
+                    "y": {
+                        "pvf_type": "number",
+                        "pvf_value": 3.472
+                    },
+                    "yaw": {
+                        "pvf_type": "number",
+                        "pvf_value": 1.234
+                    }
+                }
+            }
+        }
+    ]
+}

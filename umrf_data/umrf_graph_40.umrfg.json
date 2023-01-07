@@ -1,0 +1,39 @@
+{
+    "graph_name": "umrf_graph_40",
+    "graph_description": "Move to the kitchen island counter top on the opposite side of the oven facing the knife",
+    "graph_state": 1,
+    "umrf_actions": [
+        {
+            "name": "TaNavigateRobot",
+            "package_name": "ta_navigate_robot",
+            "description": "Move to the kitchen island counter top on the opposite side of the oven facing the knife",
+            "id": 0,
+            "effect": "synchronous",
+            "input_parameters": {
+                "location": {
+                    "pvf_type": "string",
+                    "pvf_example": "the kitchen island counter top on the opposite side of the oven facing the knife"
+                },
+                "verb": {
+                    "pvf_type": "string",
+                    "pvf_example": "Move to"
+                },
+                "pose_2d": {
+                    "x": {
+                        "pvf_type": "number",
+                        "pvf_value": 9.27
+                    },
+                    "y": {
+                        "pvf_type": "number",
+                        "pvf_value": -0.22
+                    },
+                    "yaw": {
+                        "pvf_type": "number",
+                        "pvf_value": -2.901
+                    }
+                }
+
+            }
+        }
+    ]
+}

@@ -1,0 +1,68 @@
+{
+    "graph_name": "umrf_graph_51",
+    "graph_description": "Turn around and walk up to the end of the bed.",
+    "graph_state": 1,
+    "umrf_actions": [
+        {
+            "name": "TaMoveRobot",
+            "package_name": "ta_move_robot",
+            "description": "Turn around",
+            "id": 0,
+            "effect": "synchronous",
+            "input_parameters": {
+                "direction": {
+                    "pvf_type": "string",
+                    "pvf_example": "around"
+                },
+                "verb": {
+                    "pvf_type": "string",
+                    "pvf_example": "Turn"
+                }
+            },
+            "children": [
+                {
+                    "name": "TaNavigateRobot",
+                    "id": 0
+                }
+            ]
+        },
+        {
+            "name": "TaNavigateRobot",
+            "package_name": "ta_navigate_robot",
+            "description": "walk up to the end of the bed.",
+            "id": 0,
+            "effect": "synchronous",
+            "input_parameters": {
+                "location": {
+                    "pvf_type": "string",
+                    "pvf_example": "the end of the bed"
+                },
+                "verb": {
+                    "pvf_type": "string",
+                    "pvf_example": "walk up to"
+                },
+                "pose_2d": {
+                    "x": {
+                        "pvf_type": "number",
+                        "pvf_value": -8.02
+                    },
+                    "y": {
+                        "pvf_type": "number",
+                        "pvf_value": -6.67
+                    },
+                    "yaw": {
+                        "pvf_type": "number",
+                        "pvf_value": 1.957
+                    }
+                }
+            },
+            "parents": [
+                {
+                    "name": "TaMoveRobot",
+                    "id": 0,
+                    "required": true
+                }
+            ]
+        }
+    ]
+}

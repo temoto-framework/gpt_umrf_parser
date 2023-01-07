@@ -1,0 +1,142 @@
+{
+    "graph_name": "umrf_graph_35",
+    "graph_description": "Turn around and walk halfway across the room, then turn to the left and walk to the table to the right of the bed. ",
+    "graph_state": 1,
+    "umrf_actions": [
+        {
+            "name": "TaMoveRobot",
+            "package_name": "ta_move_robot",
+            "description": "Turn around",
+            "id": 0,
+            "effect": "synchronous",
+            "input_parameters": {
+                "direction": {
+                    "pvf_type": "string",
+                    "pvf_example": "around"
+                },
+                "verb": {
+                    "pvf_type": "string",
+                    "pvf_example": "Turn"
+                }
+            },
+            "children": [
+                {
+                    "name": "TaNavigateRobot",
+                    "id": 0
+                }
+            ]
+        },
+        {
+            "name": "TaMoveRobot",
+            "package_name": "ta_move_robot",
+            "description": "turn to the left",
+            "id": 1,
+            "effect": "synchronous",
+            "input_parameters": {
+                "direction": {
+                    "pvf_type": "string",
+                    "pvf_example": "left"
+                },
+                "verb": {
+                    "pvf_type": "string",
+                    "pvf_example": "turn"
+                }
+            },
+            "children": [
+                {
+                    "name": "TaNavigateRobot",
+                    "id": 1
+                }
+            ],
+            "parents": [
+                {
+                    "name": "TaNavigateRobot",
+                    "id": 0,
+                    "required": true
+                }
+            ]
+        },
+        {
+            "name": "TaNavigateRobot",
+            "package_name": "ta_navigate_robot",
+            "description": "walk halfway across the room",
+            "id": 0,
+            "effect": "synchronous",
+            "input_parameters": {
+                "location": {
+                    "pvf_type": "string",
+                    "pvf_example": "the room"
+                },
+                "verb": {
+                    "pvf_type": "string",
+                    "pvf_example": "walk across"
+                },
+                "pose_2d": {
+                    "x": {
+                        "pvf_type": "number",
+                        "pvf_value": -5.07
+                    },
+                    "y": {
+                        "pvf_type": "number",
+                        "pvf_value": -3.99
+                    },
+                    "yaw": {
+                        "pvf_type": "number",
+                        "pvf_value": 2.975
+                    }
+                }
+            },
+            "children": [
+                {
+                    "name": "TaMoveRobot",
+                    "id": 1
+                }
+            ],
+            "parents": [
+                {
+                    "name": "TaMoveRobot",
+                    "id": 0,
+                    "required": true
+                }
+            ]
+        },
+        {
+            "name": "TaNavigateRobot",
+            "package_name": "ta_navigate_robot",
+            "description": "walk to the table to the right of the bed. ",
+            "id": 1,
+            "effect": "synchronous",
+            "input_parameters": {
+                "location": {
+                    "pvf_type": "string",
+                    "pvf_example": "the table to the right of the bed"
+                },
+                "verb": {
+                    "pvf_type": "string",
+                    "pvf_example": "walk to"
+                },
+                "pose_2d": {
+                    "x": {
+                        "pvf_type": "number",
+                        "pvf_value": -7.50
+                    },
+                    "y": {
+                        "pvf_type": "number",
+                        "pvf_value": 2.07
+                    },
+                    "yaw": {
+                        "pvf_type": "number",
+                        "pvf_value": 5.197
+                    }
+                }
+            },
+            "parents": [
+                {
+                    "name": "TaMoveRobot",
+                    "id": 1,
+                    "required": true
+                }
+            ]
+        }
+    ]
+}

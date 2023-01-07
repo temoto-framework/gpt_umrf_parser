@@ -1,0 +1,98 @@
+{
+    "graph_name": "umrf_graph_0",
+    "graph_description": "turn right, turn left, walk towards the small desk on the left side",
+    "graph_state": 1,
+    "umrf_actions": [
+        {
+            "name": "TaMoveRobot",
+            "package_name": "ta_move_robot",
+            "description": "turn right ",
+            "id": 0,
+            "effect": "synchronous",
+            "input_parameters": {
+                "direction": {
+                    "pvf_type": "string",
+                    "pvf_example": "right"
+                },
+                "verb": {
+                    "pvf_type": "string",
+                    "pvf_example": "turn"
+                }
+            },
+            "children": [
+                {
+                    "name": "TaMoveRobot",
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "name": "TaMoveRobot",
+            "package_name": "ta_move_robot",
+            "description": "turn left",
+            "id": 1,
+            "effect": "synchronous",
+            "input_parameters": {
+                "direction": {
+                    "pvf_type": "string",
+                    "pvf_example": "left"
+                },
+                "verb": {
+                    "pvf_type": "string",
+                    "pvf_example": "turn"
+                }
+            },
+            "children": [
+                {
+                    "name": "TaNavigateRobot",
+                    "id": 0
+                }
+            ],
+            "parents": [
+                {
+                    "name": "TaMoveRobot",
+                    "id": 0,
+                    "required": true
+                }
+            ]
+        },
+        {
+            "name": "TaNavigateRobot",
+            "package_name": "ta_navigate_robot",
+            "description": "walk towards the small desk on the left side",
+            "id": 0,
+            "effect": "synchronous",
+            "input_parameters": {
+                "location": {
+                    "pvf_type": "string",
+                    "pvf_example": "the small desk on the left side"
+                },
+                "verb": {
+                    "pvf_type": "string",
+                    "pvf_example": "walk towards"
+                },
+                "pose_2d": {
+                    "x": {
+                        "pvf_type": "number",
+                        "pvf_value": -5.89
+                    },
+                    "y": {
+                        "pvf_type": "number",
+                        "pvf_value": -13.07
+                    },
+                    "yaw": {
+                        "pvf_type": "number",
+                        "pvf_value": -3.427
+                    }
+                }
+            },
+            "parents": [
+                {
+                    "name": "TaMoveRobot",
+                    "id": 1,
+                    "required": true
+                }
+            ]
+        }
+    ]
+}

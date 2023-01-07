@@ -1,0 +1,68 @@
+{
+    "graph_name": "umrf_graph_34",
+    "graph_description": "turn right, walk to the dresser",
+    "graph_state": 1,
+    "umrf_actions": [
+        {
+            "name": "TaMoveRobot",
+            "package_name": "ta_move_robot",
+            "description": "turn right",
+            "id": 0,
+            "effect": "synchronous",
+            "input_parameters": {
+                "direction": {
+                    "pvf_type": "string",
+                    "pvf_example": "right"
+                },
+                "verb": {
+                    "pvf_type": "string",
+                    "pvf_example": "turn"
+                }
+            },
+            "children": [
+                {
+                    "name": "TaNavigateRobot",
+                    "id": 0
+                }
+            ]
+        },
+        {
+            "name": "TaNavigateRobot",
+            "package_name": "ta_navigate_robot",
+            "description": "walk to the dresser",
+            "id": 0,
+            "effect": "synchronous",
+            "input_parameters": {
+                "location": {
+                    "pvf_type": "string",
+                    "pvf_example": "the dresser"
+                },
+                "verb": {
+                    "pvf_type": "string",
+                    "pvf_example": "walk to"
+                },
+                "pose_2d": {
+                    "x": {
+                        "pvf_type": "number",
+                        "pvf_value": 9.034
+                    },
+                    "y": {
+                        "pvf_type": "number",
+                        "pvf_value": 8.214
+                    },
+                    "yaw": {
+                        "pvf_type": "number",
+                        "pvf_value": 0.022
+                    }
+                }
+            },
+            "parents": [
+                {
+                    "name": "TaMoveRobot",
+                    "id": 0,
+                    "required": true
+                }
+            ]
+        }
+    ]
+}

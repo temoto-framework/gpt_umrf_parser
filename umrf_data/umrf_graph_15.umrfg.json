@@ -1,0 +1,142 @@
+{
+    "graph_name": "umrf_graph_15",
+    "graph_description": "Turn right and walk to the wall then turn left and walk to the table.",
+    "graph_state": 1,
+    "umrf_actions": [
+        {
+            "name": "TaMoveRobot",
+            "package_name": "ta_move_robot",
+            "description": "Turn right",
+            "id": 0,
+            "effect": "synchronous",
+            "input_parameters": {
+                "direction": {
+                    "pvf_type": "string",
+                    "pvf_example": "right"
+                },
+                "verb": {
+                    "pvf_type": "string",
+                    "pvf_example": "Turn"
+                }
+            },
+            "children": [
+                {
+                    "name": "TaNavigateRobot",
+                    "id": 0
+                }
+            ]
+        },
+        {
+            "name": "TaMoveRobot",
+            "package_name": "ta_move_robot",
+            "description": "turn left",
+            "id": 1,
+            "effect": "synchronous",
+            "input_parameters": {
+                "direction": {
+                    "pvf_type": "string",
+                    "pvf_example": "left"
+                },
+                "verb": {
+                    "pvf_type": "string",
+                    "pvf_example": "turn"
+                }
+            },
+            "children": [
+                {
+                    "name": "TaNavigateRobot",
+                    "id": 1
+                }
+            ],
+            "parents": [
+                {
+                    "name": "TaNavigateRobot",
+                    "id": 0,
+                    "required": true
+                }
+            ]
+        },
+        {
+            "name": "TaNavigateRobot",
+            "package_name": "ta_navigate_robot",
+            "description": "walk to the wall",
+            "id": 0,
+            "effect": "synchronous",
+            "input_parameters": {
+                "location": {
+                    "pvf_type": "string",
+                    "pvf_example": "the wall"
+                },
+                "verb": {
+                    "pvf_type": "string",
+                    "pvf_example": "walk"
+                },
+                "pose_2d": {
+                    "x": {
+                        "pvf_type": "number",
+                        "pvf_value": -9.15
+                    },
+                    "y": {
+                        "pvf_type": "number",
+                        "pvf_value": 4.316
+                    },
+                    "yaw": {
+                        "pvf_type": "number",
+                        "pvf_value": 2.168
+                    }
+                }
+            },
+            "children": [
+                {
+                    "name": "TaMoveRobot",
+                    "id": 1
+                }
+            ],
+            "parents": [
+                {
+                    "name": "TaMoveRobot",
+                    "id": 0,
+                    "required": true
+                }
+            ]
+        },
+        {
+            "name": "TaNavigateRobot",
+            "package_name": "ta_navigate_robot",
+            "description": "walk to the table",
+            "id": 1,
+            "effect": "synchronous",
+            "input_parameters": {
+                "location": {
+                    "pvf_type": "string",
+                    "pvf_example": "the table"
+                },
+                "verb": {
+                    "pvf_type": "string",
+                    "pvf_example": "walk"
+                },
+                "pose_2d": {
+                    "x": {
+                        "pvf_type": "number",
+                        "pvf_value": 1.26
+                    },
+                    "y": {
+                        "pvf_type": "number",
+                        "pvf_value": 7.61
+                    },
+                    "yaw": {
+                        "pvf_type": "number",
+                        "pvf_value": -0.214
+                    }
+                }
+            },
+            "parents": [
+                {
+                    "name": "TaMoveRobot",
+                    "id": 1,
+                    "required": true
+                }
+            ]
+        }
+    ]
+}

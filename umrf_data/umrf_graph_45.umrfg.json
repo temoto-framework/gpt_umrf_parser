@@ -1,0 +1,68 @@
+{
+    "graph_name": "umrf_graph_45",
+    "graph_description": "Turn to the left to face the microwave.",
+    "graph_state": 1,
+    "umrf_actions": [
+        {
+            "name": "TaMoveRobot",
+            "package_name": "ta_move_robot",
+            "description": "Turn to the left",
+            "id": 0,
+            "effect": "synchronous",
+            "input_parameters": {
+                "direction": {
+                    "pvf_type": "string",
+                    "pvf_example": "left"
+                },
+                "verb": {
+                    "pvf_type": "string",
+                    "pvf_example": "Turn"
+                }
+            },
+            "children": [
+                {
+                    "name": "TaNavigateRobot",
+                    "id": 0
+                }
+            ]
+        },
+        {
+            "name": "TaNavigateRobot",
+            "package_name": "ta_navigate_robot",
+            "description": "face the microwave.",
+            "id": 0,
+            "effect": "synchronous",
+            "input_parameters": {
+                "landmark": {
+                    "pvf_type": "string",
+                    "pvf_example": "the microwave"
+                },
+                "verb": {
+                    "pvf_type": "string",
+                    "pvf_example": "face"
+                },
+                "pose_2d": {
+                    "x": {
+                        "pvf_type": "number",
+                        "pvf_value": -8.77
+                    },
+                    "y": {
+                        "pvf_type": "number",
+                        "pvf_value": -7.67
+                    },
+                    "yaw": {
+                        "pvf_type": "number",
+                        "pvf_value": 4.197
+                    }
+                }
+            },
+            "parents": [
+                {
+                    "name": "TaMoveRobot",
+                    "id": 0,
+                    "required": true
+                }
+            ]
+        }
+    ]
+}
