@@ -1,4 +1,5 @@
 import os
+from itertools import permutations
 
 import torch
 from torch.utils.data import Dataset, DataLoader, random_split
@@ -15,16 +16,20 @@ class Prompt:
     def __init__(self, input_information: DataLoader, validation_exs: DataLoader):
         self.input_information = input_information
         self.validation_exs = validation_exs
-        
-        # for instruction in self.validation_exs:
-        #     self.prompt_templates = self.create_prompts(instruction)
-        print('hi')
     
-    def k_examples(self, k: int):
-        raise NotImplementedError
+    """
+    This function creates permutations of all UMRF examples provided
+    by the training set, i.e., self.input_information
+    """
+    def create_k_many_prompt(self, all_prompts: list, k: int) -> list:
+        k_permutation_examples = permutations(all_prompts, k)
+        
+        k_permutations_str = []
+        for item in k_permutation_examples:
+            k_permutations_str.append(''.join(item))
+        return k_permutations_str
 
-
-    def create_robert_prompt(self, new_instruction: str) -> str:
+    def create_robert_prompt(self, new_instruction: str) -> list:
         prompt_template_list = []
 
         preamble = "Extract data from natural language setences (NL_SENTENCE) and store them " \
@@ -33,29 +38,43 @@ class Prompt:
         nl_prefix = "NL_SENTENCE:"
         desired_json_prefix = "DESIRED_JSON:"
 
-        robert_prompt_str = ""
+        suffix = nl_prefix + "\'" + new_instruction + "\'\n" + desired_json_prefix
+
+        robert_prompts = []
         for batch_idx, (nl_instruction, visual_info, umrf_graph) in enumerate(self.input_information):
             part_1 = nl_prefix + "\'" + visual_info + ' ' + nl_instruction + "\'\n"
             part_2 = desired_json_prefix + umrf_graph + "\n"
-            robert_prompt_str = robert_prompt_str + part_1 + part_2
+            robert_prompts.append(part_1 + part_2)
 
-        suffix = nl_prefix + "\'" + new_instruction + "\'\n" + desired_json_prefix
+        # Create k-combinatorial examples
+        k_combination_examples = self.create_k_many_prompt(robert_prompts, 2)
 
-        prompt_template_list.append(preamble + robert_prompt_str + suffix)
+        # Synthesizes the preamble and suffix strings to each combination example
+        prompt_template_list = []
+        for item in k_combination_examples:
+            prompt_template_list.append(preamble + item + suffix)
         return prompt_template_list
 
 
-    def create_prompts(self, new_instruction: str) -> list:
+    """
+    This function returns a list of lists. The first dimensions is proportional
+    to the number of validation examples (times the number of methods used).
+    The second dimension is the number of permutations of k-prompts.
+    """
+    def create_prompts(self) -> list:
         prompt_template_list = []
 
-        # Method 1: Concatenate all input information
-        for batch_idx, (nl_instruction, visual_info, umrf_graph) in enumerate(self.input_information):
-            prompt_template_list.append(nl_instruction + ' ' + visual_info + ' ' + umrf_graph + ' ' + new_instruction)
+        # # TODO:
+        # # Method 1: Naively concatenate all input information
+        # for batch_idx, (nl_instruction, visual_info, umrf_graph) in enumerate(self.input_information):
+        #     prompt_template_list.append(nl_instruction + ' ' + visual_info + ' ' + umrf_graph + ' ' + new_instruction)
 
         # Method 2: Use Robert's Prompt Template
-        prompt_template_list.append(self.create_robert_prompt(new_instruction))
+        for batch_idx, (nl_instruction, visual_info, umrf_graph) in enumerate(self.validation_exs):
+            prompt_template_list.append(self.create_robert_prompt(nl_instruction))
         return prompt_template_list
-   
+
+
 if __name__ == '__main__':
     print('Step 1: load in UMRF dataset')
     umrf_data_path = os.getcwd() + '/umrf_data/*'
@@ -66,6 +85,8 @@ if __name__ == '__main__':
 
     print('Step 2: Create Prompt Obj')
     prompts = Prompt(input_information=training_exs, validation_exs=validation_exs)
-    print(prompts.create_robert_prompt(prompts.validation_exs[0][0])[0])
+    # print(len(prompts.create_robert_prompt(prompts.validation_exs[0][0])))
+    print(len(prompts.create_prompts()))
+
 
 
