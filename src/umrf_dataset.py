@@ -23,7 +23,7 @@ class UMRF(Dataset):
     Provide an index for a UMRF example and get in return:
     
     + Natural Language Instruction (string)
-    + Image Data (coordinate information as a string of Pose2D coords)
+    + Image Data (coordinate information as a string of Pose2D coords) & visual landmark info
     + UMRF Graph (the ground truth label/ decoding)
     """
     def __getitem__(self, idx: int) -> tuple[str, str, str]:

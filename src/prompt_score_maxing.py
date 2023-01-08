@@ -98,5 +98,5 @@ if __name__ == '__main__':
                      validation_exs=validation_exs)
     prompts_list = prompts.create_prompts()
 
-    jiang_opt = GreedyPrompt(prompts_list, validation_exs, device)
-    print(jiang_opt.top_one_selection())
+    greedy_prompt = GreedyPrompt(prompts_list, validation_exs, device)
+    print(greedy_prompt.top_one_selection())

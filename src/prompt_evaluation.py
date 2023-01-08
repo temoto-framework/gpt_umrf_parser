@@ -14,8 +14,8 @@ Method 1. Greedy Search: Measure BLEU score variance along the axes of
   UMRF graph decoding w/ a single node success vs UMRF graph decoding with more than one node
 
 Method 2. Reinforcement Learning:
-+ which augmetnation-actions provide the best improvement on BLEU acc overall
-+ which augmentation-actions hurt performance in general
++ which augmetnation-actions provide the best improvement  overall
++ which augmentation-actions hurt performance on BLEU acc overall
 
-+ report the optimal prompt desing w/ BLEU score
++ report the optimal prompt design w/ BLEU score
 """

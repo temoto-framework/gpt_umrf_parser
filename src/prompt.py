@@ -67,8 +67,8 @@ class Prompt:
     def create_prompts(self) -> list:
         prompt_template_list = []
 
-        # # TODO:
-        # # Method 1: Naively concatenate all input information
+        # TODO:
+        # Method 1: Naively concatenate all input information
         # for batch_idx, (nl_instruction, visual_info, umrf_graph) in enumerate(self.input_information):
         #     prompt_template_list.append(nl_instruction + ' ' + visual_info + ' ' + umrf_graph + ' ' + new_instruction)
 
