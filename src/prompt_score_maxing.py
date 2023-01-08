@@ -1,4 +1,5 @@
 import os
+import timeit
 
 import torch
 from torch.utils.data import DataLoader, random_split
@@ -37,36 +38,39 @@ class JiangPrompt:
         accuracies = torch.zeros(h, w).cpu()
         i = 0
         for valid_ex in self.prompt_templates:
+            print(i)
             j = 0
             label = valid_ex_ground_truths[i]
+            # max seq input size = 4096 for gpt-3 OpenAI
+            # max seq input size = 1024 for gpt-2
             for prompt in valid_ex:
                 prompt_tokenized = self.tokenizer(
-                    prompt, return_tensors="pt").to(device)
-
-                # max seq input size = 4096 for gpt-3 OpenAI
-                # max seq input size = 1024 for gpt-2
-                truncated_prompt = self.truncate_prompt(prompt_tokenized, max_seq_len=512)
+                    prompt, truncation=True, max_length=512, return_tensors="pt").to(device)
 
                 # Step 1. run every prompt through gpt-2
-                outputs = self.model.generate(**truncated_prompt, return_dict_in_generate=True,
+                outputs = self.model.generate(**prompt_tokenized, return_dict_in_generate=True,
                                             output_scores=True, max_length=1024)
                 output_tokens = self.tokenizer.decode(outputs['sequences'][0])
 
                 # # Step 2. check accuracy on ea. prompt against validation label
                 accuracies[i, j] = self.acc(label, output_tokens)
+
                 j = j + 1
             i = i + 1
         # Step 3. choose highest acc. score
         # average acc across validation examples
+        avg_accs = torch.mean(accuracies, dim=0)
         # then choose prompt with highest acc
-        return accuracies
+        best_prompt_indx = torch.argmax(avg_accs)
+        # choose best prompt construction
+        # NOTE: when reporting in paper, remove the validation_ex
+        # from the prompt!! (we just want the generic template
+        # despite arbirarily grabbing this format from the first
+        # validation example)
+        best_prompt = self.prompt_templates[0][best_prompt_indx]
 
+        return best_prompt
 
-    def truncate_prompt(self, tokens, max_seq_len: int):
-        if tokens['input_ids'].shape[1] > max_seq_len:
-            tokens['input_ids'] = tokens['input_ids'][:, 0:max_seq_len]
-            tokens['attention_mask'] = tokens['attention_mask'][:, 0:max_seq_len]
-        return tokens
 
     """
     Calculates the character-level accuracy for a single
@@ -87,7 +91,7 @@ class JiangPrompt:
                     num_correct_characters = num_correct_characters + 1
                 i = i + 1
             acc = num_correct_characters / \
-                (len(ground_truth) + penalize_extra_decodings)
+                (len(ground_truth) + abs(penalize_extra_decodings))
 
         else:
             for char in model_output:
@@ -95,7 +99,7 @@ class JiangPrompt:
                     num_correct_characters = num_correct_characters + 1
                 i = i + 1
             acc = num_correct_characters / \
-                (len(model_output) + penalize_extra_decodings)
+                (len(model_output) + abs(penalize_extra_decodings))
 
         return acc
 
