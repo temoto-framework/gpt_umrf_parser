@@ -1,11 +1,12 @@
 import os
 
 import torch
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, random_split
 import transformers
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
 
 from umrf_dataset import UMRF
+from prompt import Prompt
 from prompt_score_maxing import JiangPrompt
 
 
@@ -16,9 +17,6 @@ def check_for_gpu() -> str:
         device = 'cpu'
     return device
 
-def create_prompt(nl_instruction:str, image_data: str, umrf_exs: list) -> str:
-    raise NotImplementedError
-
 
 if __name__ == '__main__':
     device = check_for_gpu()
@@ -26,24 +24,26 @@ if __name__ == '__main__':
     umrf_data_path = os.getcwd() + '/umrf_data/*'
     umrf_dataset = UMRF(umrf_data_path)
 
-    prompt_method = JiangPrompt(umrf_dataset)
-    print(prompt_method.input_information)
+    training_exs, validation_exs = random_split(umrf_dataset, [20, 7],
+                                                generator=torch.Generator().manual_seed(42))
 
-    # gpt2_tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
-    # gpt2_model = GPT2LMHeadModel.from_pretrained("gpt2").to(device)
+    print('Step 2: Create Prompt Obj')
+    prompts = Prompt(input_information=training_exs,
+                     validation_exs=validation_exs)
 
-    # prompt = "hello my name is Selma"
-    # prompt_tokenized = gpt2_tokenizer(prompt, return_tensors="pt").to(device)
-    # outputs = gpt2_model.generate(**prompt_tokenized, return_dict_in_generate=True,
-    #  output_scores=True, max_new_tokens=100)
-    
-    # # output_scores provide logits over GPT2 vocabulary size
-    # # to make into logprobs, apply torch.softmax()
-    # output_scores = outputs['scores']
+    gpt2_tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+    gpt2_model = GPT2LMHeadModel.from_pretrained("gpt2").to(device)
 
-    # # greedy decoding of most likely next token prediction
-    # output_tokens = gpt2_tokenizer.decode(outputs['sequences'][0])
+    prompt = "hello my name is Selma"
+    prompt_tokenized = gpt2_tokenizer(prompt, return_tensors="pt").to(device)
+    outputs = gpt2_model.generate(**prompt_tokenized, return_dict_in_generate=True,
+                                  output_scores=True, max_new_tokens=100)
 
+    # output_scores provide logits over GPT2 vocabulary size
+    # to make into logprobs, apply torch.softmax()
+    output_scores = outputs['scores']
 
+    # greedy decoding of most likely next token prediction
+    output_tokens = gpt2_tokenizer.decode(outputs['sequences'][0])
 
-
+    print(output_tokens)
