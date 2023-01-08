@@ -52,7 +52,7 @@ class GreedyPrompt:
                 output_tokens = self.tokenizer.decode(outputs['sequences'][0])
 
                 # Step 2. check accuracy on ea. prompt against validation label
-                accuracies[i, j] = bleu_acc([output_tokens],[[label]])
+                accuracies[i, j] = bleu_acc([output_tokens], [[label]])
                 j = j + 1
             i = i + 1
         # Step 3. choose highest acc. score
@@ -69,37 +69,6 @@ class GreedyPrompt:
         best_prompt = self.prompt_templates[0][best_prompt_indx]
 
         return best_prompt
-
-    """
-    Calculates the character-level accuracy for a single
-    UMRF ground-truth against a single UMRF model decoding
-    """
-
-    def acc(self, input_information: str, model_output: str):
-        ground_truth = input_information[2].lower()
-        model_output = model_output.lower()
-
-        penalize_extra_decodings = len(model_output) - len(ground_truth)
-
-        num_correct_characters = 0
-        i = 0
-        if penalize_extra_decodings >= 0:
-            for char in ground_truth:
-                if char == model_output[i]:
-                    num_correct_characters = num_correct_characters + 1
-                i = i + 1
-            acc = num_correct_characters / \
-                (len(ground_truth) + abs(penalize_extra_decodings))
-
-        else:
-            for char in model_output:
-                if char == ground_truth[i]:
-                    num_correct_characters = num_correct_characters + 1
-                i = i + 1
-            acc = num_correct_characters / \
-                (len(model_output) + abs(penalize_extra_decodings))
-
-        return acc
 
 
 def check_for_gpu() -> str:
