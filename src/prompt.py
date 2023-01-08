@@ -80,15 +80,11 @@ class Prompt:
 
 
 if __name__ == '__main__':
-    print('Step 1: Load in UMRF dataset')
     umrf_data_path = os.getcwd() + '/umrf_data/*'
     full_umrf_dataset = UMRF(umrf_data_path)
 
     training_exs, validation_exs = random_split(full_umrf_dataset, [20, 7],
                                                 generator=torch.Generator().manual_seed(42))
 
-    print('Step 2: Create Prompt Obj')
     prompts = Prompt(input_information=training_exs,
                      validation_exs=validation_exs)
-    # print(len(prompts.create_robert_prompt(prompts.validation_exs[0][0])))
-    print(len(prompts.create_prompts()))

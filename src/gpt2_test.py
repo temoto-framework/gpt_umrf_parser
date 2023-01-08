@@ -21,12 +21,14 @@ from prompt_score_maxing import JiangPrompt
 def check_for_gpu() -> str:
     if torch.cuda.is_available():
         device = 'cuda'
+        torch.cuda.manual_seed(230)
     else:
         device = 'cpu'
     return device
 
 
 if __name__ == '__main__':
+    torch.manual_seed(230)
     device = check_for_gpu()
 
     umrf_data_path = os.getcwd() + '/umrf_data/*'

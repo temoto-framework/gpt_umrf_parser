@@ -24,7 +24,6 @@ class JiangPrompt:
         self.tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
         self.model = GPT2LMHeadModel.from_pretrained("gpt2").to(device)
 
-        print(self.model.config)
 
     def top_one_selection(self):
         # Step 0. Grab validation labels for UMRF graphs
@@ -104,6 +103,7 @@ class JiangPrompt:
 def check_for_gpu() -> str:
     if torch.cuda.is_available():
         device = 'cuda'
+        torch.cuda.manual_seed(230)
         # Empty GPU Cache
         torch.cuda.empty_cache()
     else:
@@ -112,6 +112,9 @@ def check_for_gpu() -> str:
 
 
 if __name__ == '__main__':
+    # set seed for reproducible experiments
+    torch.manual_seed(230)
+
     device = check_for_gpu()
 
     umrf_data_path = os.getcwd() + '/umrf_data/*'
