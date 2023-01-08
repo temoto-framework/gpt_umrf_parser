@@ -4,3 +4,4 @@ line_profiler
 tensorboard
 glob2
 transformers
+torchmetrics
