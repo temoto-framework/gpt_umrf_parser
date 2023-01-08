@@ -3,7 +3,7 @@ import timeit
 
 import torch
 from torch.utils.data import DataLoader, random_split
-import transformers
+from torchmetrics import BLEUScore
 from transformers import GPT2Tokenizer, GPT2LMHeadModel, GPT2Config
 
 from umrf_dataset import UMRF
@@ -11,20 +11,18 @@ from prompt import Prompt
 
 
 """
-This class will be responsible for defining reward metrics and
-different search methods resembling those outlined in (Jiang2020c)
-to find optimal discrete prompt
+This class will be responsible for defining the exhaustive search
+to find optimal discrete prompt.
 """
 
 
-class JiangPrompt:
+class GreedyPrompt:
     def __init__(self, prompt_templates: list, validation_exs: DataLoader, device: str):
         self.prompt_templates = prompt_templates
         self.validation_exs = validation_exs
 
         self.tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
         self.model = GPT2LMHeadModel.from_pretrained("gpt2").to(device)
-
 
     def top_one_selection(self):
         # Step 0. Grab validation labels for UMRF graphs
@@ -34,7 +32,8 @@ class JiangPrompt:
 
         h = len(self.prompt_templates)
         w = len(self.prompt_templates[0])
-        
+
+        bleu_acc = BLEUScore()
         accuracies = torch.zeros(h, w).cpu()
         i = 0
         for valid_ex in self.prompt_templates:
@@ -49,16 +48,16 @@ class JiangPrompt:
 
                 # Step 1. run every prompt through gpt-2
                 outputs = self.model.generate(**prompt_tokenized, return_dict_in_generate=True,
-                                            output_scores=True, max_length=1024)
+                                              output_scores=True, max_length=1024)
                 output_tokens = self.tokenizer.decode(outputs['sequences'][0])
 
-                # # Step 2. check accuracy on ea. prompt against validation label
-                accuracies[i, j] = self.acc(label, output_tokens)
-
+                # Step 2. check accuracy on ea. prompt against validation label
+                accuracies[i, j] = bleu_acc([output_tokens],[[label]])
                 j = j + 1
             i = i + 1
         # Step 3. choose highest acc. score
         # average acc across validation examples
+        torch.save(accuracies, 'greedy_max_accs.pt')
         avg_accs = torch.mean(accuracies, dim=0)
         # then choose prompt with highest acc
         best_prompt_indx = torch.argmax(avg_accs)
@@ -70,7 +69,6 @@ class JiangPrompt:
         best_prompt = self.prompt_templates[0][best_prompt_indx]
 
         return best_prompt
-
 
     """
     Calculates the character-level accuracy for a single
@@ -131,5 +129,5 @@ if __name__ == '__main__':
                      validation_exs=validation_exs)
     prompts_list = prompts.create_prompts()
 
-    jiang_opt = JiangPrompt(prompts_list, validation_exs, device)
+    jiang_opt = GreedyPrompt(prompts_list, validation_exs, device)
     print(jiang_opt.top_one_selection())
