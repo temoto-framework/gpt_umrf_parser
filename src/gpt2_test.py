@@ -1,3 +1,11 @@
+"""
+This code is only to test the huggingface transformer
+GPT-2 tokenizer/model prediction.
+
+No prompt optimization occurs here.
+"""
+
+
 import os
 
 import torch
@@ -34,7 +42,8 @@ if __name__ == '__main__':
     gpt2_tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
     gpt2_model = GPT2LMHeadModel.from_pretrained("gpt2").to(device)
 
-    prompt = "hello my name is Selma"
+    prompt = "hello my name is selma"
+
     prompt_tokenized = gpt2_tokenizer(prompt, return_tensors="pt").to(device)
     outputs = gpt2_model.generate(**prompt_tokenized, return_dict_in_generate=True,
                                   output_scores=True, max_new_tokens=100)
