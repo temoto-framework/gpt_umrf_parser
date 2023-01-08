@@ -24,6 +24,8 @@ class JiangPrompt:
         self.tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
         self.model = GPT2LMHeadModel.from_pretrained("gpt2").to(device)
 
+        print(self.model.config)
+
     def top_one_selection(self):
         # Step 0. Grab validation labels for UMRF graphs
         valid_ex_ground_truths = []
@@ -42,17 +44,17 @@ class JiangPrompt:
                 prompt_tokenized = self.tokenizer(
                     prompt, return_tensors="pt").to(device)
 
+                # max seq input size = 4096 for gpt-3 OpenAI
                 # max seq input size = 1024 for gpt-2
-                truncated_prompt = self.truncate_prompt(prompt_tokenized, max_seq_len=1024)
+                truncated_prompt = self.truncate_prompt(prompt_tokenized, max_seq_len=512)
 
                 # Step 1. run every prompt through gpt-2
-                # TODO: BROKEN HERE. MAKE SURE TOKENIZER IS ACTUALLY WORKING
-                outputs = self.model.generate(**prompt_tokenized, return_dict_in_generate=True,
-                                            output_scores=True, max_new_tokens=100)
-                # output_tokens = self.tokenizer.decode(outputs['sequences'][0])
+                outputs = self.model.generate(**truncated_prompt, return_dict_in_generate=True,
+                                            output_scores=True, max_length=1024)
+                output_tokens = self.tokenizer.decode(outputs['sequences'][0])
 
                 # # Step 2. check accuracy on ea. prompt against validation label
-                # accuracies[i, j] = self.acc(label, output_tokens)
+                accuracies[i, j] = self.acc(label, output_tokens)
                 j = j + 1
             i = i + 1
         # Step 3. choose highest acc. score
