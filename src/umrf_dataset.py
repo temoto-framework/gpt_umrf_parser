@@ -50,10 +50,22 @@ class UMRF(Dataset):
         coordinate_data = []
         for action in umrf_actions:
             try:
+                # keeps format in the json style just in case using ROS-like messaging
+                # for pose information
                 coordinate_data.append(str(action['input_parameters']['pose_2d']))
             except:
                 pass
-        img_str = "".join(coordinate_data)
+            try:
+                # no json formatting for list of relevant locations
+                coordinate_data.append(str(action['input_parameters']['location']['pvf_example']))
+            except:
+                pass
+            try:
+                # no json formattin gfor list of relevant landmarks
+                coordinate_data.append(str(action['input_parameters']['landmark']['pvf_example']))
+            except:
+                pass
+        img_str = " ".join(coordinate_data)
         return img_str
     
 
