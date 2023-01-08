@@ -43,6 +43,8 @@ class GreedyPrompt:
             # max seq input size = 4096 for gpt-3 OpenAI
             # max seq input size = 1024 for gpt-2
             for prompt in valid_ex:
+                print('Prompt design:')
+                print(prompt)
                 prompt_tokenized = self.tokenizer(
                     prompt, truncation=True, max_length=512, return_tensors="pt").to(device)
 

@@ -58,6 +58,20 @@ class Prompt:
             prompt_template_list.append(preamble + item + suffix)
         return prompt_template_list
 
+    def create_naive_prompt(self, new_instruction: str) -> list:
+        naive_prompts = []
+        for batch_idx, (nl_instruction, visual_info, umrf_graph) in enumerate(self.input_information):
+            naive_prompts.append(visual_info + ' + ' +
+                                 nl_instruction + ' + ' + umrf_graph)
+            naive_prompts.append(nl_instruction + ' + ' +
+                                 visual_info + ' + ' + umrf_graph)
+
+        # Create k-combinatorial examples
+        k_combination_examples = self.create_k_many_prompt(naive_prompts, 2)
+
+        # Synthesizes the preamble and suffix strings to each combination example
+        return k_combination_examples
+
     """
     This function returns a list of lists. The first dimensions is proportional
     to the number of validation examples (times the number of methods used).
@@ -67,15 +81,15 @@ class Prompt:
     def create_prompts(self) -> list:
         prompt_template_list = []
 
-        # TODO:
         # Method 1: Naively concatenate all input information
-        # for batch_idx, (nl_instruction, visual_info, umrf_graph) in enumerate(self.input_information):
-        #     prompt_template_list.append(nl_instruction + ' ' + visual_info + ' ' + umrf_graph + ' ' + new_instruction)
-
-        # Method 2: Use Robert's Prompt Template
-        for batch_idx, (nl_instruction, visual_info, umrf_graph) in enumerate(self.validation_exs):
+        for batch_idx, (nl_instruction, visual_info, umrf_graph) in enumerate(self.input_information):
             prompt_template_list.append(
-                self.create_robert_prompt(nl_instruction))
+                self.create_naive_prompt(nl_instruction))
+
+        # # Method 2: Use Robert's Prompt Template
+        # for batch_idx, (nl_instruction, visual_info, umrf_graph) in enumerate(self.validation_exs):
+        #     prompt_template_list.append(
+        #         self.create_robert_prompt(nl_instruction))
         return prompt_template_list
 
 
