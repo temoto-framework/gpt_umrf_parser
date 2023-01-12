@@ -23,7 +23,7 @@ def generate(prompt_in):
 		completion = openai.Completion.create(
 				engine=model_engine,
 				prompt=prompt_in,
-				max_tokens=1024,
+				max_tokens=2048,
 				n=1,
 				stop=None,
 				temperature=0.5,
@@ -32,7 +32,7 @@ def generate(prompt_in):
 		raw_output = completion.choices[0].text
 		print ("RAW GPT OUTPUT:")
 		print ("------------------------------------------------------------")
-		print (raw_output)
+		print (completion)
 		print ("------------------------------------------------------------\n")
 
 		return completion.choices[0].text

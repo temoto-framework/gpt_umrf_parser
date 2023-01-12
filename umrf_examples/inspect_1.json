@@ -1,0 +1,102 @@
+{
+    "graph_name": "robot go inspect the workshop [x=74.2; y=-223.6; yaw=2.72]",
+    "umrf_actions": [
+        {
+            "name": "navigate",
+            "description": "go",
+            "id": 0,
+            "effect": "synchronous",
+            "input_parameters": {
+                "location": {
+                    "pvf_type": "string",
+                    "pvf_value": "workshop"
+                },
+                "pose_2d": {
+                    "x": {
+                        "pvf_type": "number",
+                        "pvf_value": 74.2
+                    },
+                    "y": {
+                        "pvf_type": "number",
+                        "pvf_value": -223.6
+                    },
+                    "yaw": {
+                        "pvf_type": "number",
+                        "pvf_value": 2.72
+                    }
+                }
+            },
+            "children": [
+                {
+                    "name": "move_arm",
+                    "id": 0
+                }
+            ]
+        },
+        {
+            "name": "move_arm",
+            "id": 0,
+            "effect": "synchronous",
+            "input_parameters": {
+                "pose_quat": {
+                    "orientation": {
+                        "w": {
+                            "pvf_type": "number",
+                            "pvf_value": 1
+                        },
+                        "x": {
+                            "pvf_type": "number",
+                            "pvf_value": 0
+                        },
+                        "y": {
+                            "pvf_type": "number",
+                            "pvf_value": 0
+                        },
+                        "z": {
+                            "pvf_type": "number",
+                            "pvf_value": 0
+                        }
+                    },
+                    "position": {
+                        "x": {
+                            "pvf_type": "number",
+                            "pvf_value": 0.03
+                        },
+                        "y": {
+                            "pvf_type": "number",
+                            "pvf_value": 0.54
+                        },
+                        "z": {
+                            "pvf_type": "number",
+                            "pvf_value": 0.03
+                        }
+                    }
+                }
+            },
+            "children": [
+                {
+                    "name": "take_picture",
+                    "id": 0
+                }
+            ],
+            "parents": [
+                {
+                    "name": "navigate",
+                    "id": 0
+                }
+            ]
+        },
+        {
+            "name": "take_picture",
+            "description": "inspect",
+            "id": 0,
+            "effect": "synchronous",
+            "parents": [
+                {
+                    "name": "move_arm",
+                    "id": 0
+                }
+            ]
+        }
+    ]
+}

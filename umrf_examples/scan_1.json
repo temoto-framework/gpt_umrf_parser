@@ -1,0 +1,64 @@
+{
+    "graph_name": "Scan the area",
+    "umrf_actions": [
+        {
+            "name": "move_arm",
+            "id": 0,
+            "effect": "synchronous",
+            "input_parameters": {
+                "pose_quat": {
+                    "orientation": {
+                        "w": {
+                            "pvf_type": "number",
+                            "pvf_value": 1
+                        },
+                        "x": {
+                            "pvf_type": "number",
+                            "pvf_value": 0
+                        },
+                        "y": {
+                            "pvf_type": "number",
+                            "pvf_value": 0
+                        },
+                        "z": {
+                            "pvf_type": "number",
+                            "pvf_value": 0
+                        }
+                    },
+                    "position": {
+                        "x": {
+                            "pvf_type": "number",
+                            "pvf_value": 0.03
+                        },
+                        "y": {
+                            "pvf_type": "number",
+                            "pvf_value": 0.54
+                        },
+                        "z": {
+                            "pvf_type": "number",
+                            "pvf_value": 0.03
+                        }
+                    }
+                }
+            },
+            "children": [
+                {
+                    "name": "take_picture",
+                    "id": 0
+                }
+            ]
+        },
+        {
+            "name": "take_picture",
+            "description": "scan",
+            "id": 0,
+            "effect": "synchronous",
+            "parents": [
+                {
+                    "name": "move_arm",
+                    "id": 0
+                }
+            ]
+        }
+    ]
+}
