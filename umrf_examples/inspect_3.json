@@ -5,6 +5,7 @@
             "name": "navigate",
             "description": "go",
             "id": 0,
+            "effect": "synchronous",
             "input_parameters": {
                 "location": {
                     "pvf_type": "string",
@@ -36,6 +37,7 @@
             "name": "move_arm",
             "description": "observe",
             "id": 0,
+            "effect": "synchronous",
             "input_parameters": {
                 "pose_quat": {
                     "orientation": {
@@ -89,6 +91,7 @@
             "name": "take_picture",
             "description": "observe",
             "id": 0,
+            "effect": "synchronous",
             "children": [
                 {
                     "name": "move_arm",
@@ -106,6 +109,7 @@
             "name": "move_arm",
             "description": "observe",
             "id": 1,
+            "effect": "synchronous",
             "input_parameters": {
                 "pose_quat": {
                     "orientation": {
@@ -159,6 +163,7 @@
             "name": "take_picture",
             "description": "observe",
             "id": 1,
+            "effect": "synchronous",
             "parents": [
                 {
                     "name": "move_arm",
