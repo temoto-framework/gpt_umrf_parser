@@ -23,7 +23,7 @@ def generate(prompt_in):
 		completion = openai.Completion.create(
 				engine=model_engine,
 				prompt=prompt_in,
-				max_tokens=2048,
+				max_tokens=1028,
 				n=1,
 				stop=None,
 				temperature=0.5,
