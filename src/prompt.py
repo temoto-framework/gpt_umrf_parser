@@ -1,5 +1,6 @@
 import os
 from itertools import permutations
+import json
 
 import torch
 from torch.utils.data import DataLoader, random_split
@@ -61,6 +62,7 @@ class Prompt:
     def create_naive_prompt(self, new_instruction: str) -> list:
         naive_prompts = []
         for batch_idx, (nl_instruction, visual_info, umrf_graph) in enumerate(self.input_information):
+            # visual_info = self.simplify_viz(visual_info)
             naive_prompts.append(visual_info + ' + ' +
                                  nl_instruction + ' + ' + umrf_graph)
             naive_prompts.append(nl_instruction + ' + ' +
@@ -93,6 +95,7 @@ class Prompt:
         return prompt_template_list
 
 
+
 if __name__ == '__main__':
     umrf_data_path = os.getcwd() + '/umrf_data/*'
     full_umrf_dataset = UMRF(umrf_data_path)
@@ -102,3 +105,5 @@ if __name__ == '__main__':
 
     prompts = Prompt(input_information=training_exs,
                      validation_exs=validation_exs)
+
+    print(prompts.create_prompts())

@@ -2,6 +2,7 @@ import os
 import glob2 as glob
 
 import json
+import csv
 
 from torch.utils.data import Dataset, DataLoader
 
@@ -34,6 +35,7 @@ class UMRF(Dataset):
         umrf = self.path_to_umrf(umrf_ex_path)
 
         nl_instruction = str(umrf['graph_description'])
+        del umrf['graph_description']
         image_data = self.get_image_data(umrf)
 
         return nl_instruction, image_data, str(umrf)
@@ -47,14 +49,19 @@ class UMRF(Dataset):
         return json_dict
 
     def get_image_data(self, umrf: json) -> str:
+        is_simplified = True
         umrf_actions = umrf['umrf_actions']
         coordinate_data = []
         for action in umrf_actions:
             try:
                 # keeps format in the json style just in case using ROS-like messaging
                 # for pose information
-                coordinate_data.append(
-                    str(action['input_parameters']['pose_2d']))
+                if not is_simplified:
+                    coordinate_data.append(
+                        str(action['input_parameters']['pose_2d']))
+                else:
+                    coordinate_data.append(
+                        self.simplify_viz(action['input_parameters']['pose_2d']))
             except:
                 pass
             try:
@@ -73,8 +80,39 @@ class UMRF(Dataset):
         return img_str
 
 
+    def simplify_viz(self, viz_info):
+        # print(viz_info)
+        # str_len = len(viz_info)
+        # index = str_len
+        # for char in reversed(viz_info):
+        #     if char == '}':
+        #         break
+        #     index = index - 1
+        # viz_json = json.loads(viz_info[0:index].replace("\'", "\""))
+
+        x = viz_info['x']['pvf_value']
+        y = viz_info['y']['pvf_value']
+        yaw = viz_info['yaw']['pvf_value']
+
+        simplified_coords = '[x={}; y={}; yaw={}]'.format(x, y, yaw)
+
+        return simplified_coords
+
 if __name__ == '__main__':
     umrf_data_path = os.getcwd() + '/umrf_data/*'
     print(umrf_data_path)
     dataset = UMRF(umrf_data_path)
     print(dataset[0])
+
+    f = open('umrf.csv', 'w')
+    header = ['prompt', 'target']
+    writer = csv.writer(f)
+    writer.writerow(header)
+    for ex in dataset:
+        nl_instruction = ex[0]
+        visual_info = ex[1]
+        label = ex[2]
+
+        reformatted = [nl_instruction + ' ' + visual_info + ' ' + label]
+        writer.writerow(reformatted)
+    f.close()
