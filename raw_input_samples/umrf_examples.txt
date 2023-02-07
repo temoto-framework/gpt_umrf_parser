@@ -1,0 +1,104 @@
+The following examples contain directed cyclic graph that is outlined using parent-child node relations.
+The graph is laid out as a list of nodes and the children "C=" and parent "P=" nodes it relates to.
+S|NodeName indicates that this node stops the child "NodeName". NodeName|S indicates that this node is stopped by parent called "NodeName".
+Pay close atteintion to 1) which nodes run in sequence and which run in parallel, 2) conditional phrases like "until" and "for" indicate usage of S|NodeName.
+
+INPUT: "Go to the workshop."
+COMMENT: Robot navigates into the workshop.
+OUTPUT:
+* Root(): {C=[Navigate]}
+* Navigate(workshop): {P=[Root]}
+
+INPUT: "Move to the main hall."
+COMMENT: Robot navigates into the main hall.
+OUTPUT:
+* Root(): {C=[Navigate]}
+* Navigate(main hall): {P=[Root]}
+
+INPUT: "Scan the area."
+COMMENT: Robot moves the arm to a predefined pose and takes a picture.
+OUTPUT:
+* Root(): {C=[MoveArm]}
+* MoveArm: {C=[TakePicture] P=[Root]}
+* TakePicture: {C=[MoveArm]}
+
+INPUT: "Robot go inspect the workshop."
+COMMENT: Robot navigates into the workshop and takes two pictures in different poses.
+OUTPUT:
+* Root(): {C=[Navigate]}
+* Navigate(workshop): {C=[MoveArm_1] P=[Root]}
+* MoveArm_1: {C=[TakePicture_1] P=[Navigate]}
+* TakePicture_1: {C=[MoveArm_2] P=[MoveArm_1]}
+* MoveArm_2: {C=[TakePicture_2] P=[TakePicture_1]}
+* TakePicture_2: {P=[MoveArm_2]}
+
+INPUT: "Robot go observe the valve."
+COMMENT: Robot navigates near the valve and takes two pictures in different poses.
+OUTPUT:
+* Root(): {C=[Navigate]}
+* Navigate(valve): {C=[MoveArm_1] P=[Root]}
+* MoveArm_1: {C=[TakePicture_1] P=[Navigate]}
+* TakePicture_1: {C=[MoveArm_2] P=[MoveArm_1]}
+* MoveArm_2: {C=[TakePicture_2] P=[TakePicture_1]}
+* TakePicture_2: {P=[MoveArm_2]}
+
+INPUT: "Watch the area for 5 minutes."
+COMMENT: Robot starts videorecording the area and counting down from 5 minutes simultaneously. Robot stops videorecording after 5 minutes. 
+OUTPUT:
+* Root(): {C=[TakeVideo, Wait]}
+* TakeVideo(area): {P=[Root, Wait|S]}
+* Wait(5): {C=[S|TakeVideo], P=[Root]}
+
+All broken from here
+
+INPUT: "Go to the accident site. Return home after either reaching the site or after 30 minutes."
+COMMENT: Robot starts videorecording the area and counting down from 20 minutes simultaneously. Robot stops videorecording after 20 minutes. 
+OUTPUT:
+* Root(): {C=[TakeVideo, Wait]}
+* TakeVideo(area): {P=[Root, Wait|S]}
+* Wait(20): {C=[S|TakeVideo], P=[Root]}
+
+INPUT: "Navigate to the lab and take a TakePicture every 3 secons while going there."
+COMMENT: Robot starts navigating to the lab and taking pictures simultaneously. The pictures are taken in every 3 seconds, hence there is a loop between taking a picture and waiting for 3 seconds. Robot stops(S) taking pictures after reaching the lab. 
+OUTPUT:
+* Root(): {C=[Navigate, TakePicture]}
+* Navigate(Lab): {C=[S|Wait, S|TakePicture], P=[Root]}
+* TakePicture(): {C=[Wait], P=[Wait, Navigate|S]}
+* Wait(3): {C=[TakePicture], P=[TakePicture, Navigate|S]}
+
+INPUT: "Navigate to the lab, but if you detect an environmental hazard then inspect it, proceed moving to lab after inspection."
+COMMENT: Robot starts navigating to the lab and inspect the environment simultaneously. If hazard is detected, then the robot stops(S) navigating to the lab, and navigates to the hazard instead. The robot moves its arm and takes a videorecording. After this, the robot continues navigating to the lab.
+OUTPUT:
+* Root(): {C=[Navigate_1, Scan]} # Root node
+* Navigate_1(lab): {C=[S|Scan] P=[Root, Scan|S, Navigate_2]} # Navigation to lab is stopped if the scanner detects a hazard. Also 
+* Scan(hazard): {C=[Navigate_2, S|Navigate_1], P=[Root, Navigate_3|S]}
+* Inspect(): {C=[Navigate_2], P=[Scan]}
+* Navigate_2(lab): {C=[S|Scan], P=[Inspect]}
+
+INPUT: "Robot go to the lab and watch it for 5 minutes, then return to the workshop."
+COMMENT: Robot navigates to the lab. After reaching the lab it starts videorecording the area and counting down from 5 minutes simultaneously. Robot stops videorecording after 5 minutes and navigates to the workshop.
+OUTPUT:
+* Root(): {C=[Navigate_1]}
+* Navigate_1(lab): {C=[TakeVideo, Wait], P=[Root]}
+* TakeVideo(lab): {P=[Navigate_1, Wait|S]}
+* Wait(5): {C=[S|TakeVideo, Navigate_2], P=[Navigate_1]}
+* Navigate_2(workshop): {P=[Wait]}
+
+INPUT: "Robot photograph the accident site in 3 different view angles repeatedly for 9 minutes and then move back to the headquarter."
+COMMENT: Robot navigates to the accident site. Then it moves its arm in a predefined pose and takes a picture. It moves the arm in 3 different poses, each time taking a picture
+OUTPUT:
+* Root(): {C=[Navigate_1]}
+* Navigate_1(area): {C=[MoveArm_1, Wait], P=[Root]}
+* MoveArm_1: {C=[TakePicture_1] P=[Navigate_1]}
+* TakePicture_1: {C=[MoveArm_2] P=[MoveArm_1]}
+* MoveArm_2: {C=[TakePicture_2] P=[TakePicture_1]}
+* TakePicture_2: {C=[MoveArm_3] P=[MoveArm_2]}
+* MoveArm_3: {C=[TakePicture_3] P=[TakePicture_2]}
+* TakePicture_3: {C=[Wait] P=[MoveArm_3]}
+* Wait(4): {C=[Navigate_2], P=[TakePicture_3]}
+* Navigate_2(headquarter): {P=[Wait]}
+
+Convert the following sentence to a graph:
+
+INPUT: "Robot go to the accident site and circle around it in 3 different waypoints for 30 minutes. After that move back to the headquarter."
+OUTPUT:
