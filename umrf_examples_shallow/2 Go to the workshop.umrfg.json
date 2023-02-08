@@ -1,0 +1,26 @@
+{
+    "graph_name": "Go to the workshop",
+    "umrf_actions": [
+        {
+            "name": "Root",
+            "id": 0,
+            "children": [
+                {
+                    "name": "Navigate",
+                    "id": 0
+                }
+            ]
+        },
+        {
+            "name": "Navigate",
+            "description": "go, workshop",
+            "id": 0,
+            "parents": [
+                {
+                    "name": "Root",
+                    "id": 0
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,112 @@
+{
+    "graph_name": "Scan the area until it is clear",
+    "umrf_actions": [
+        {
+            "name": "Root",
+            "id": 0,
+            "children": [
+                {
+                    "name": "MoveArm",
+                    "id": 0
+                },
+                {
+                    "name": "RecordVideo",
+                    "id": 0
+                },
+                {
+                    "name": "DetectEvent",
+                    "id": 0
+                }
+            ]
+        },
+        {
+            "name": "DetectEvent",
+            "description": "scan, until clear, Pre-empt RecordVideo, MoveArm_0, MoveArm_1 after the area is clear",
+            "id": 0,
+            "children": [
+                {
+                    "name": "RecordVideo",
+                    "id": 0
+                },
+                {
+                    "name": "MoveArm",
+                    "id": 0
+                },
+                {
+                    "name": "MoveArm",
+                    "id": 1
+                }
+            ],
+            "parents": [
+                {
+                    "name": "Root",
+                    "id": 0
+                }
+            ]
+        },
+        {
+            "name": "RecordVideo",
+            "description": "Start recording a video. Pre-empted by Wait",
+            "id": 0,
+            "parents": [
+                {
+                    "name": "Root",
+                    "id": 0
+                },
+                {
+                    "name": "DetectEvent",
+                    "id": 0,
+                    "stop_when_received": true
+                }
+            ]
+        },
+        {
+            "name": "MoveArm",
+            "description": "move to pose1 (camera attached to arm). Pre-empted by Wait",
+            "id": 0,
+            "children": [
+                {
+                    "name": "MoveArm",
+                    "id": 1
+                }
+            ],
+            "parents": [
+                {
+                    "name": "Root",
+                    "id": 0
+                },
+                {
+                    "name": "MoveArm",
+                    "id": 1
+                },
+                {
+                    "name": "DetectEvent",
+                    "id": 0,
+                    "stop_when_received": true
+                }
+            ]
+        },
+        {
+            "name": "MoveArm",
+            "description": "move to pose2 (camera attached to arm). Pre-empted by Wait",
+            "id": 1,
+            "children": [
+                {
+                    "name": "MoveArm",
+                    "id": 0
+                }
+            ],
+            "parents": [
+                {
+                    "name": "DetectEvent",
+                    "id": 0,
+                    "stop_when_received": true
+                },
+                {
+                    "name": "MoveArm",
+                    "id": 0
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,111 @@
+{
+    "graph_name": "Move the arm in three different poses and hold each pose for 15 seconds.",
+    "umrf_actions": [
+        {
+            "name": "Root",
+            "id": 0,
+            "children": [
+                {
+                    "name": "MoveArm",
+                    "id": 0
+                }
+            ]
+        },
+        {
+            "name": "MoveArm",
+            "description": "move to pose1",
+            "id": 0,
+            "children": [
+                {
+                    "name": "Timer",
+                    "id": 0
+                }
+            ],
+            "parents": [
+                {
+                    "name": "Root",
+                    "id": 0
+                }
+            ]
+        },
+        {
+            "name": "Timer",
+            "description": "wait, 15 seconds",
+            "id": 0,
+            "children": [
+                {
+                    "name": "MoveArm",
+                    "id": 1
+                }
+            ],
+            "parents": [
+                {
+                    "name": "MoveArm",
+                    "id": 0
+                }
+            ]
+        },
+        {
+            "name": "MoveArm",
+            "description": "move to pose2",
+            "id": 1,
+            "children": [
+                {
+                    "name": "Timer",
+                    "id": 1
+                }
+            ],
+            "parents": [
+                {
+                    "name": "Timer",
+                    "id": 0
+                }
+            ]
+        },
+        {
+            "name": "Timer",
+            "description": "wait, 15 seconds",
+            "id": 1,
+            "children": [
+                {
+                    "name": "MoveArm",
+                    "id": 2
+                }
+            ],
+            "parents": [
+                {
+                    "name": "MoveArm",
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "name": "MoveArm",
+            "description": "move to pose3",
+            "id": 2,
+            "children": [
+                {
+                    "name": "Timer",
+                    "id": 2
+                }
+            ],
+            "parents": [
+                {
+                    "name": "Timer",
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "name": "Timer",
+            "description": "wait, 15 seconds",
+            "id": 2,
+            "parents": [
+                {
+                    "name": "MoveArm",
+                    "id": 0
+                }
+            ]
+        }
+    ]
+}

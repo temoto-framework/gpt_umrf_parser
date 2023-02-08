@@ -1,0 +1,52 @@
+{
+    "graph_name": "Navigate to the lab and vidorecord while going there",
+    "umrf_actions": [
+        {
+            "name": "Root",
+            "id": 0,
+            "children": [
+                {
+                    "name": "RecordVideo",
+                    "id": 0
+                },
+                {
+                    "name": "Navigate",
+                    "id": 0
+                }
+            ]
+        },
+        {
+            "name": "Navigate",
+            "description": "Navigate, lab. Pre-empt RecordVideo when finished",
+            "id": 0,
+            "children": [
+                {
+                    "name": "RecordVideo",
+                    "id": 0
+                }
+            ],
+            "parents": [
+                {
+                    "name": "Root",
+                    "id": 0
+                }
+            ]
+        },
+        {
+            "name": "RecordVideo",
+            "description": "record video. Pre-empted by Navigate",
+            "id": 0,
+            "parents": [
+                {
+                    "name": "Navigate",
+                    "id": 0,
+                    "stop_when_received": true
+                },
+                {
+                    "name": "Root",
+                    "id": 0
+                }
+            ]
+        }
+    ]
+}
