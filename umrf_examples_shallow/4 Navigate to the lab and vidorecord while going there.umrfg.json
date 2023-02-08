@@ -1,40 +1,42 @@
 {
     "graph_name": "Navigate to the lab and vidorecord while going there",
+    "graph_description": "Robot with a navigation capability and a camera moves to the lab and records the traverse.",
     "umrf_actions": [
         {
             "name": "Root",
+            "description": "Start with navigation and videorecording at the same time",
             "id": 0,
             "children": [
                 {
-                    "name": "RecordVideo",
+                    "name": "Navigate",
                     "id": 0
                 },
                 {
-                    "name": "Navigate",
+                    "name": "RecordVideo",
                     "id": 0
                 }
             ]
         },
         {
             "name": "Navigate",
-            "description": "Navigate, lab. Pre-empt RecordVideo when finished",
+            "description": "Navigate to the lab. Pre-empt RecordVideo when finished",
             "id": 0,
-            "children": [
-                {
-                    "name": "RecordVideo",
-                    "id": 0
-                }
-            ],
             "parents": [
                 {
                     "name": "Root",
+                    "id": 0
+                }
+            ],
+            "children": [
+                {
+                    "name": "RecordVideo",
                     "id": 0
                 }
             ]
         },
         {
             "name": "RecordVideo",
-            "description": "record video. Pre-empted by Navigate",
+            "description": "Record video until pre-empted by Navigate_0",
             "id": 0,
             "parents": [
                 {

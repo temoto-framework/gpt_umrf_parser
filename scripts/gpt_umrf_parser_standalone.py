@@ -23,7 +23,7 @@ def generate(prompt_in):
 		completion = openai.Completion.create(
 				engine=model_engine,
 				prompt=prompt_in,
-				max_tokens=500,
+				max_tokens=700,
 				n=1,
 				stop=None,
 				temperature=0.5,
@@ -38,7 +38,7 @@ def generate(prompt_in):
 		return completion.choices[0].text
 
 def text_to_umrf(text_in):
-		prompt = "Extract data from natural language sentences (NL_SENTENCE) and store them in JSON format (DESIRED_JSON). I will provide you examples of the desired JSON structure.\n"
+		prompt = "Extract data from natural language sentences (NL_SENTENCE) and store them in JSON format (DESIRED_JSON).\n"
 
 		for umrf_graph_sample in umrf_graph_samples:
 				example = \

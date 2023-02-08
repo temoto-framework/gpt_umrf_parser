@@ -1,8 +1,10 @@
 {
     "graph_name": "Go to the workshop",
+    "graph_description": "Robot with a navigation capability moves to the workshop.",
     "umrf_actions": [
         {
             "name": "Root",
+            "description": "Start with navigation",
             "id": 0,
             "children": [
                 {
@@ -13,7 +15,7 @@
         },
         {
             "name": "Navigate",
-            "description": "go, workshop",
+            "description": "Go to the workshop",
             "id": 0,
             "parents": [
                 {

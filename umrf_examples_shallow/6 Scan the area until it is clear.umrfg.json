@@ -1,28 +1,36 @@
 {
     "graph_name": "Scan the area until it is clear",
+    "graph_description": "Robot with a camera attached to a manipulator arm observes the area by moving the camera between different viewing angles until the area is clear.",
     "umrf_actions": [
         {
             "name": "Root",
+            "description": "At the same time start recording, set up the event detector, and move the arm to pose1",
             "id": 0,
             "children": [
-                {
-                    "name": "MoveArm",
-                    "id": 0
-                },
                 {
                     "name": "RecordVideo",
                     "id": 0
                 },
                 {
                     "name": "DetectEvent",
+                    "id": 0
+                },
+                {
+                    "name": "MoveArm",
                     "id": 0
                 }
             ]
         },
         {
             "name": "DetectEvent",
-            "description": "scan, until clear, Pre-empt RecordVideo, MoveArm_0, MoveArm_1 after the area is clear",
+            "description": "Detect the 'until clear' event, which finishes the task. Pre-empt RecordVideo, MoveArm_0, MoveArm_1 after the area is clear",
             "id": 0,
+            "parents": [
+                {
+                    "name": "Root",
+                    "id": 0
+                }
+            ],
             "children": [
                 {
                     "name": "RecordVideo",
@@ -36,17 +44,11 @@
                     "name": "MoveArm",
                     "id": 1
                 }
-            ],
-            "parents": [
-                {
-                    "name": "Root",
-                    "id": 0
-                }
             ]
         },
         {
             "name": "RecordVideo",
-            "description": "Start recording a video. Pre-empted by Wait",
+            "description": "Recording a video until pre-empted by DetectEvent",
             "id": 0,
             "parents": [
                 {
@@ -62,46 +64,46 @@
         },
         {
             "name": "MoveArm",
-            "description": "move to pose1 (camera attached to arm). Pre-empted by Wait",
+            "description": "Move to pose0 if not pre-empted by DetectEvent. Forms a loop with MoveArm_1",
             "id": 0,
+            "parents": [
+                {
+                    "name": "Root",
+                    "id": 0
+                },
+                {
+                    "name": "MoveArm",
+                    "id": 1
+                },
+                {
+                    "name": "DetectEvent",
+                    "id": 0,
+                    "stop_when_received": true
+                }
+            ],
             "children": [
                 {
                     "name": "MoveArm",
                     "id": 1
                 }
-            ],
-            "parents": [
-                {
-                    "name": "Root",
-                    "id": 0
-                },
-                {
-                    "name": "MoveArm",
-                    "id": 1
-                },
-                {
-                    "name": "DetectEvent",
-                    "id": 0,
-                    "stop_when_received": true
-                }
             ]
         },
         {
             "name": "MoveArm",
-            "description": "move to pose2 (camera attached to arm). Pre-empted by Wait",
+            "description": "Move to pose1 if not pre-empted by DetectEvent. Forms a loop with MoveArm_0",
             "id": 1,
-            "children": [
-                {
-                    "name": "MoveArm",
-                    "id": 0
-                }
-            ],
             "parents": [
                 {
                     "name": "DetectEvent",
                     "id": 0,
                     "stop_when_received": true
                 },
+                {
+                    "name": "MoveArm",
+                    "id": 0
+                }
+            ],
+            "children": [
                 {
                     "name": "MoveArm",
                     "id": 0

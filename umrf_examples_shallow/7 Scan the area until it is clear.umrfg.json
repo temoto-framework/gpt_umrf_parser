@@ -1,8 +1,10 @@
 {
-    "graph_name": "Go to the accident site and then Scan the area until it is clear",
+    "graph_name": "Go to the accident site and then Scan the area until the fire is extinguished",
+    "description": "Robot with a navigation capability and a camera attached to its arm first goes to the accident site. Then it starts observing by moving the camera between different viewing angles until the fire is extinguished.",
     "umrf_actions": [
         {
             "name": "Root",
+            "description": "Start by first navigating to the accident site",
             "id": 0,
             "children": [
                 {
@@ -13,8 +15,14 @@
         },
         {
             "name": "Navigate",
-            "description": "Navigate, accident site",
+            "description": "Navigate to the accident site, then simultaneously start detecting the end of fire, recording, and move the arm to pose1",
             "id": 0,
+            "parents": [
+                {
+                    "name": "Root",
+                    "id": 0
+                }
+            ],
             "children": [
                 {
                     "name": "DetectEvent",
@@ -26,20 +34,20 @@
                 },
                 {
                     "name": "MoveArm",
-                    "id": 0
-                }
-            ],
-            "parents": [
-                {
-                    "name": "Root",
                     "id": 0
                 }
             ]
         },
         {
             "name": "DetectEvent",
-            "description": "scan until clear, Pre-empt RecordVideo, MoveArm_0, MoveArm_1 after the area is clear",
+            "description": "Detect the 'fire extinguished' event. When detected, pre-empt RecordVideo, MoveArm_0, MoveArm_1, thus finishing the task",
             "id": 0,
+            "parents": [
+                {
+                    "name": "Navigate",
+                    "id": 0
+                }
+            ],
             "children": [
                 {
                     "name": "RecordVideo",
@@ -53,17 +61,11 @@
                     "name": "MoveArm",
                     "id": 1
                 }
-            ],
-            "parents": [
-                {
-                    "name": "Navigate",
-                    "id": 0
-                }
             ]
         },
         {
             "name": "RecordVideo",
-            "description": "Start recording a video. Pre-empted by DetectEvent",
+            "description": "Start recording a video until pre-empted by DetectEvent",
             "id": 0,
             "parents": [
                 {
@@ -79,46 +81,46 @@
         },
         {
             "name": "MoveArm",
-            "description": "move to pose1 (camera attached to arm). Forms a loop with MoveArm_1. Pre-empted by DetectEvent",
+            "description": "Move to pose0 if not pre-empted by DetectEvent. Forms a loop with MoveArm_1",
             "id": 0,
+            "parents": [
+                {
+                    "name": "Navigate",
+                    "id": 0
+                },
+                {
+                    "name": "MoveArm",
+                    "id": 1
+                },
+                {
+                    "name": "DetectEvent",
+                    "id": 0,
+                    "stop_when_received": true
+                }
+            ],
             "children": [
                 {
                     "name": "MoveArm",
                     "id": 1
                 }
-            ],
-            "parents": [
-                {
-                    "name": "Navigate",
-                    "id": 0
-                },
-                {
-                    "name": "MoveArm",
-                    "id": 1
-                },
-                {
-                    "name": "DetectEvent",
-                    "id": 0,
-                    "stop_when_received": true
-                }
             ]
         },
         {
             "name": "MoveArm",
-            "description": "move to pose2 (camera attached to arm). Forms a loop with MoveArm_0. Pre-empted by DetectEvent",
+            "description": "Move to pose1 if not pre-empted by DetectEvent. Forms a loop with MoveArm_1",
             "id": 1,
-            "children": [
-                {
-                    "name": "MoveArm",
-                    "id": 0
-                }
-            ],
             "parents": [
                 {
                     "name": "DetectEvent",
                     "id": 0,
                     "stop_when_received": true
                 },
+                {
+                    "name": "MoveArm",
+                    "id": 0
+                }
+            ],
+            "children": [
                 {
                     "name": "MoveArm",
                     "id": 0

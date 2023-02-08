@@ -1,8 +1,10 @@
 {
     "graph_name": "Move to the main hall",
+    "graph_description": "Robot with a navigation capability moves to the main hall.",
     "umrf_actions": [
         {
             "name": "Root",
+            "description": "Start with navigation",
             "id": 0,
             "children": [
                 {
@@ -13,7 +15,7 @@
         },
         {
             "name": "Navigate",
-            "description": "move, main hall",
+            "description": "Move to the main hall",
             "id": 0,
             "parents": [
                 {

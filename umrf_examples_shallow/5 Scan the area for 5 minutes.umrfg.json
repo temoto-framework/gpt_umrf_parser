@@ -1,28 +1,36 @@
 {
     "graph_name": "Scan the area for 5 minutes",
+    "graph_description": "Robot with a camera attached to a manipulator arm observes the area by moving the camera between different viewing angles for 5 minutes.",
     "umrf_actions": [
         {
             "name": "Root",
+            "description": "At the same time start recording, set the timer, and move the arm to pose1",
             "id": 0,
             "children": [
-                {
-                    "name": "MoveArm",
-                    "id": 0
-                },
                 {
                     "name": "RecordVideo",
                     "id": 0
                 },
                 {
                     "name": "Timer",
+                    "id": 0
+                },
+                {
+                    "name": "MoveArm",
                     "id": 0
                 }
             ]
         },
         {
             "name": "Timer",
-            "description": "5 minutes, Pre-empt RecordVideo, MoveArm_0, MoveArm_1 after timer reaches 5 minutes",
+            "description": "Count down from 5 minutes. Pre-empt RecordVideo, MoveArm_0, MoveArm_1 after timer reaches zero, finising the task",
             "id": 0,
+            "parents": [
+                {
+                    "name": "Root",
+                    "id": 0
+                }
+            ],
             "children": [
                 {
                     "name": "RecordVideo",
@@ -36,17 +44,11 @@
                     "name": "MoveArm",
                     "id": 1
                 }
-            ],
-            "parents": [
-                {
-                    "name": "Root",
-                    "id": 0
-                }
             ]
         },
         {
             "name": "RecordVideo",
-            "description": "Start recording a video. Pre-empted by Timer",
+            "description": "Start recording a video until pre-empted by Timer",
             "id": 0,
             "parents": [
                 {
@@ -62,46 +64,46 @@
         },
         {
             "name": "MoveArm",
-            "description": "move to pose1 (camera attached to arm). Pre-empted by Timer",
+            "description": "Move to pose0 if not pre-empted by Timer. Forms a loop with MoveArm_1",
             "id": 0,
+            "parents": [
+                {
+                    "name": "Root",
+                    "id": 0
+                },
+                {
+                    "name": "MoveArm",
+                    "id": 1
+                },
+                {
+                    "name": "Timer",
+                    "id": 0,
+                    "stop_when_received": true
+                }
+            ],
             "children": [
                 {
                     "name": "MoveArm",
                     "id": 1
                 }
-            ],
-            "parents": [
-                {
-                    "name": "Root",
-                    "id": 0
-                },
-                {
-                    "name": "MoveArm",
-                    "id": 1
-                },
-                {
-                    "name": "Timer",
-                    "id": 0,
-                    "stop_when_received": true
-                }
             ]
         },
         {
             "name": "MoveArm",
-            "description": "move to pose2 (camera attached to arm). Pre-empted by Timer",
+            "description": "Move to pose1 if not pre-empted by Timer. Forms a loop with MoveArm_0",
             "id": 1,
-            "children": [
-                {
-                    "name": "MoveArm",
-                    "id": 0
-                }
-            ],
             "parents": [
                 {
                     "name": "Timer",
                     "id": 0,
                     "stop_when_received": true
                 },
+                {
+                    "name": "MoveArm",
+                    "id": 0
+                }
+            ],
+            "children": [
                 {
                     "name": "MoveArm",
                     "id": 0

@@ -1,8 +1,10 @@
 {
     "graph_name": "Go to the workshop, Timer for 3 minutes, and then come back to the headquarter.",
+    "graph_description": "Robot with a navigation capability moves to the workshop, waits for 3 min, and then goes back to the headquarter.",
     "umrf_actions": [
         {
             "name": "Root",
+            "description": "Start with navigation",
             "id": 0,
             "children": [
                 {
@@ -13,41 +15,41 @@
         },
         {
             "name": "Navigate",
-            "description": "go, workshop",
+            "description": "Go to the workshop",
             "id": 0,
-            "children": [
-                {
-                    "name": "Timer",
-                    "id": 0
-                }
-            ],
             "parents": [
                 {
                     "name": "Root",
+                    "id": 0
+                }
+            ],
+            "children": [
+                {
+                    "name": "Timer",
                     "id": 0
                 }
             ]
         },
         {
             "name": "Timer",
-            "description": "wait, 3 minutes",
+            "description": "Then wait for 3 minutes",
             "id": 0,
-            "children": [
-                {
-                    "name": "Navigate",
-                    "id": 1
-                }
-            ],
             "parents": [
                 {
                     "name": "Navigate",
                     "id": 0
                 }
+            ],
+            "children": [
+                {
+                    "name": "Navigate",
+                    "id": 1
+                }
             ]
         },
         {
           "name": "Navigate",
-          "description": "come, headquarter",
+          "description": "After waiting, go back to the headquarter",
           "id": 1,
           "parents": [
               {
