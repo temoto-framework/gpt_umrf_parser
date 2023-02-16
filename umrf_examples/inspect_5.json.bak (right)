@@ -1,0 +1,180 @@
+{
+    "graph_name": "robot go inspect the kitchen [x=-5.612; y=-5.899; yaw=-3.132]",
+    "graph_description": "",
+    "graph_state": 1,
+    "umrf_actions": [
+        {
+            "name": "TaMoveArm",
+            "package_name": "ta_move_arm",
+            "id": 0,
+            "effect": "synchronous",
+            "input_parameters": {
+                "pose_quat": {
+                    "orientation": {
+                        "w": {
+                            "pvf_type": "number",
+                            "pvf_value": 0.931
+                        },
+                        "x": {
+                            "pvf_type": "number",
+                            "pvf_value": 0.056
+                        },
+                        "y": {
+                            "pvf_type": "number",
+                            "pvf_value": -0.124
+                        },
+                        "z": {
+                            "pvf_type": "number",
+                            "pvf_value": 0.339
+                        }
+                    },
+                    "position": {
+                        "x": {
+                            "pvf_type": "number",
+                            "pvf_value": 0.708
+                        },
+                        "y": {
+                            "pvf_type": "number",
+                            "pvf_value": -0.285
+                        },
+                        "z": {
+                            "pvf_type": "number",
+                            "pvf_value": 0.987
+                        }
+                    }
+                }
+            },
+            "children": [
+                {
+                    "name": "TaTakePicture",
+                    "id": 0
+                }
+            ],
+            "parents": [
+                {
+                    "name": "TaNavigate",
+                    "id": 0                    
+                }
+            ]
+        },
+        {
+            "name": "TaMoveArm",
+            "package_name": "ta_move_arm",
+            "id": 1,
+            "effect": "synchronous",
+            "input_parameters": {
+                "pose_quat": {
+                    "orientation": {
+                        "w": {
+                            "pvf_type": "number",
+                            "pvf_value": 0.972
+                        },
+                        "x": {
+                            "pvf_type": "number",
+                            "pvf_value": 0.030
+                        },
+                        "y": {
+                            "pvf_type": "number",
+                            "pvf_value": -0.195
+                        },
+                        "z": {
+                            "pvf_type": "number",
+                            "pvf_value": -0.126
+                        }
+                    },
+                    "position": {
+                        "x": {
+                            "pvf_type": "number",
+                            "pvf_value": 0.695
+                        },
+                        "y": {
+                            "pvf_type": "number",
+                            "pvf_value": -0.370
+                        },
+                        "z": {
+                            "pvf_type": "number",
+                            "pvf_value": 0.955
+                        }
+                    }
+                }
+            },
+            "children": [
+                {
+                    "name": "TaTakePicture",
+                    "id": 1
+                }
+            ],
+            "parents": [
+                {
+                    "name": "TaTakePicture",
+                    "id": 0
+                }
+            ]
+        },
+        {
+            "name": "TaNavigate",
+            "package_name": "ta_navigate",
+            "description": "go",
+            "id": 0,
+            "effect": "synchronous",
+            "input_parameters": {
+                "location": {
+                    "pvf_type": "string",
+                    "pvf_value": "kitchen"
+                },
+                "pose_2d": {
+                    "x": {
+                        "pvf_type": "number",
+                        "pvf_value": -5.612
+                    },
+                    "y": {
+                        "pvf_type": "number",
+                        "pvf_value": -5.899
+                    },
+                    "yaw": {
+                        "pvf_type": "number",
+                        "pvf_value": -3.132
+                    }
+                }
+            },
+            "children": [
+                {
+                    "name": "TaMoveArm",
+                    "id": 0
+                }
+            ]
+        },
+        {
+            "name": "TaTakePicture",
+            "package_name": "ta_take_picture",
+            "description": "inspect",
+            "id": 0,
+            "effect": "synchronous",
+            "children": [
+                {
+                    "name": "TaMoveArm",
+                    "id": 1
+                }
+            ],
+            "parents": [
+                {
+                    "name": "TaMoveArm",
+                    "id": 0
+                }
+            ]
+        },
+        {
+            "name": "TaTakePicture",
+            "package_name": "ta_take_picture",
+            "description": "inspect",
+            "id": 1,
+            "effect": "synchronous",
+            "parents": [
+                {
+                    "name": "TaMoveArm",
+                    "id": 1
+                }
+            ]
+        }
+    ]
+}

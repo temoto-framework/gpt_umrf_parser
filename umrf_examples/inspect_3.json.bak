@@ -43,33 +43,33 @@
                     "orientation": {
                         "w": {
                             "pvf_type": "number",
-                            "pvf_value": 0.824
+                            "pvf_value": 0.54
                         },
                         "x": {
                             "pvf_type": "number",
-                            "pvf_value": 0.005
+                            "pvf_value": 0.2
                         },
                         "y": {
                             "pvf_type": "number",
-                            "pvf_value": 0.038
+                            "pvf_value": 0.33
                         },
                         "z": {
                             "pvf_type": "number",
-                            "pvf_value": -0.566
+                            "pvf_value": -0.1
                         }
                     },
                     "position": {
                         "x": {
                             "pvf_type": "number",
-                            "pvf_value": 0.464
+                            "pvf_value": 0.2
                         },
                         "y": {
                             "pvf_type": "number",
-                            "pvf_value": 0.441
+                            "pvf_value": 0.54
                         },
                         "z": {
                             "pvf_type": "number",
-                            "pvf_value": 0.788
+                            "pvf_value": 0.32
                         }
                     }
                 }
@@ -115,33 +115,33 @@
                     "orientation": {
                         "w": {
                             "pvf_type": "number",
-                            "pvf_value": 0.725
+                            "pvf_value": 1.0
                         },
                         "x": {
                             "pvf_type": "number",
-                            "pvf_value": -0.061
+                            "pvf_value": 0.0
                         },
                         "y": {
                             "pvf_type": "number",
-                            "pvf_value": 0.152
+                            "pvf_value": 0.0
                         },
                         "z": {
                             "pvf_type": "number",
-                            "pvf_value": 0.670
+                            "pvf_value": 0.0
                         }
                     },
                     "position": {
                         "x": {
                             "pvf_type": "number",
-                            "pvf_value": 0.520
+                            "pvf_value": 0.2
                         },
                         "y": {
                             "pvf_type": "number",
-                            "pvf_value": 0.493
+                            "pvf_value": 0.0
                         },
                         "z": {
                             "pvf_type": "number",
-                            "pvf_value": 0.776
+                            "pvf_value": 0.32
                         }
                     }
                 }

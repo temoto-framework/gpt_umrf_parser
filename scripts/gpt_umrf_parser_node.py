@@ -23,7 +23,7 @@ class GptUmrfNode:
 				umrf_graph_msg = BroadcastStartUmrfGraph()
 				umrf_graph_msg.umrf_graph_name = msg.data
 				umrf_graph_msg.name_match_required = False
-				umrf_graph_msg.targets.append("everybody")
+				umrf_graph_msg.targets.append("vaultbot")
 				umrf_graph_msg.umrf_graph_json = umrf_json_str
 				self.umrf_pub.publish(umrf_graph_msg)
 

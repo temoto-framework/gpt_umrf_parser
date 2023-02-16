@@ -1,41 +1,11 @@
 {
-    "graph_name": "robot go observe the valve [x=-93.6; y=11.0; yaw=-0.85]",
+    "graph_name": "robot go inspect the kitchen [x=-5.612; y=-5.899; yaw=-3.132]",
+    "graph_description": "",
+    "graph_state": 1,
     "umrf_actions": [
-          {
-            "name": "navigate",
-            "description": "go",
-            "id": 0,
-            "effect": "synchronous",
-            "input_parameters": {
-                "location": {
-                    "pvf_type": "string",
-                    "pvf_value": "valve"
-                },
-                "pose_2d": {
-                    "x": {
-                        "pvf_type": "number",
-                        "pvf_value": -93.6
-                    },
-                    "y": {
-                        "pvf_type": "number",
-                        "pvf_value": 11.0
-                    },
-                    "yaw": {
-                        "pvf_type": "number",
-                        "pvf_value": -0.85
-                    }
-                }
-            },
-            "children": [
-                {
-                    "name": "move_arm",
-                    "id": 0
-                }
-            ]
-        },
         {
-            "name": "move_arm",
-            "description": "observe",
+            "name": "TaMoveArm",
+            "package_name": "ta_move_arm",
             "id": 0,
             "effect": "synchronous",
             "input_parameters": {
@@ -76,38 +46,20 @@
             },
             "children": [
                 {
-                    "name": "take_picture",
+                    "name": "TaTakePicture",
                     "id": 0
                 }
             ],
             "parents": [
                 {
-                    "name": "navigate",
-                    "id": 0
+                    "name": "TaNavigate",
+                    "id": 0                    
                 }
             ]
         },
         {
-            "name": "take_picture",
-            "description": "observe",
-            "id": 0,
-            "effect": "synchronous",
-            "children": [
-                {
-                    "name": "move_arm",
-                    "id": 1
-                }
-            ],
-            "parents": [
-                {
-                    "name": "move_arm",
-                    "id": 0
-                }
-            ]
-        },
-        {
-            "name": "move_arm",
-            "description": "observe",
+            "name": "TaMoveArm",
+            "package_name": "ta_move_arm",
             "id": 1,
             "effect": "synchronous",
             "input_parameters": {
@@ -148,26 +100,83 @@
             },
             "children": [
                 {
-                    "name": "take_picture",
+                    "name": "TaTakePicture",
                     "id": 1
                 }
             ],
             "parents": [
                 {
-                    "name": "take_picture",
+                    "name": "TaTakePicture",
                     "id": 0
                 }
             ]
         },
         {
-            "name": "take_picture",
-            "description": "observe",
+            "name": "TaNavigate",
+            "package_name": "ta_navigate",
+            "description": "go",
+            "id": 0,
+            "effect": "synchronous",
+            "input_parameters": {
+                "location": {
+                    "pvf_type": "string",
+                    "pvf_value": "kitchen"
+                },
+                "pose_2d": {
+                    "x": {
+                        "pvf_type": "number",
+                        "pvf_value": -5.612
+                    },
+                    "y": {
+                        "pvf_type": "number",
+                        "pvf_value": -5.899
+                    },
+                    "yaw": {
+                        "pvf_type": "number",
+                        "pvf_value": -3.132
+                    }
+                }
+            },
+            "children": [
+                {
+                    "name": "TaMoveArm",
+                    "id": 0
+                }
+            ]
+        },
+        {
+            "name": "TaTakePicture",
+            "package_name": "ta_take_picture",
+            "description": "inspect",
+            "id": 0,
+            "effect": "synchronous",
+            "children": [
+                {
+                    "name": "TaMoveArm",
+                    "id": 1
+                }
+            ],
+            "parents": [
+                {
+                    "name": "TaMoveArm",
+                    "id": 0,
+                    "required": true,
+                    "stop_when_received": false
+                }
+            ]
+        },
+        {
+            "name": "TaTakePicture",
+            "package_name": "ta_take_picture",
+            "description": "inspect",
             "id": 1,
             "effect": "synchronous",
             "parents": [
                 {
-                    "name": "move_arm",
-                    "id": 1
+                    "name": "TaMoveArm",
+                    "id": 1,
+                    "required": true,
+                    "stop_when_received": false
                 }
             ]
         }
