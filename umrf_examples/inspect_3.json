@@ -83,7 +83,9 @@
             "parents": [
                 {
                     "name": "navigate",
-                    "id": 0
+                    "id": 0,
+                    "required": true,
+                    "stop_when_received": false
                 }
             ]
         },
@@ -101,7 +103,9 @@
             "parents": [
                 {
                     "name": "move_arm",
-                    "id": 0
+                    "id": 0,
+                    "required": true,
+                    "stop_when_received": false
                 }
             ]
         },
@@ -155,7 +159,9 @@
             "parents": [
                 {
                     "name": "take_picture",
-                    "id": 0
+                    "id": 0,
+                    "required": true,
+                    "stop_when_received": false
                 }
             ]
         },
@@ -167,7 +173,9 @@
             "parents": [
                 {
                     "name": "move_arm",
-                    "id": 1
+                    "id": 1,
+                    "required": true,
+                    "stop_when_received": false
                 }
             ]
         }

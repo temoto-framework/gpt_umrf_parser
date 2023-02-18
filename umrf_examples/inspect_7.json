@@ -53,7 +53,9 @@
             "parents": [
                 {
                     "name": "TaNavigate",
-                    "id": 0                    
+                    "id": 0,
+                    "required": true,
+                    "stop_when_received": false
                 }
             ]
         },
@@ -107,7 +109,9 @@
             "parents": [
                 {
                     "name": "TaTakePicture",
-                    "id": 0
+                    "id": 0,
+                    "required": true,
+                    "stop_when_received": false
                 }
             ]
         },
