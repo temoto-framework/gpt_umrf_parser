@@ -13,16 +13,17 @@ codellama_minimal_csv_paths = [
 ]
 
 codellama_df_1 = pd.read_csv(codellama_minimal_csv_paths[0])
-bleu_score_1 = bleu_fn.compute(predictions=codellama_df_1["prediction"], references=[codellama_df_1["graph"]])
+codellama_df_1["bleu_score"] = codellama_df_1.apply(lambda x: bleu_fn.compute([x.prediction], [x.graph]), axis=1)
+# bleu_score_1 = bleu_fn.compute(predictions=codellama_df_1["prediction"], references=[codellama_df_1["graph"]])
 
 codellama_df_2 = pd.read_csv(codellama_minimal_csv_paths[1])
-bleu_score_2 = bleu_fn.compute(predictions=codellama_df_2["prediction"], references=[codellama_df_2["graph"]])
+# bleu_score_2 = bleu_fn.compute(predictions=codellama_df_2["prediction"], references=[codellama_df_2["graph"]])
 
 codellama_df_3 = pd.read_csv(codellama_minimal_csv_paths[2])
-bleu_score_3 = bleu_fn.compute(predictions=codellama_df_3["prediction"], references=[codellama_df_3["graph"]])
+# bleu_score_3 = bleu_fn.compute(predictions=codellama_df_3["prediction"], references=[codellama_df_3["graph"]])
 
 # TODO: find average? find std. dev?
-bleu_score_list = [bleu_score_1, bleu_score_2, bleu_score_3]
+# bleu_score_list = [bleu_score_1, bleu_score_2, bleu_score_3]
 
 # TODO: calc num valid jsons?
 
