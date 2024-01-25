@@ -1,8 +1,0 @@
-name: hard-prompting
-channels:
-    - defaults
-    - pytorch
-    - conda-forge
-dependencies:
-    - pytorch==1.13.0
-    - cudatoolkit=11.6 

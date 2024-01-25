@@ -1,0 +1,13 @@
+#Infos
+dataset_dir_path: "/home/selmawanna/PycharmProjects/robotics_adv_robo_2024/datasets/"
+id_dataset_file_name: "newest_id_alfred.csv"
+
+model_dir_path: "/home/selmawanna/hf_models/"
+model_file_names: {"llama-7b": "Llama-2-7b-hf",
+                   "codellama": "CodeLlama-7b-Instruct-hf",
+                   "mistral": "Mistral-7B-Instruct-v0.2",}
+
+test_set_id: "id_test"
+task_instruction_type: "minimal"
+
+output_dir_path: "/home/selmawanna/PycharmProjects/robotics_adv_robo_2024/generated_outputs_1024/experiment_1/"
