@@ -1,0 +1,21 @@
+example_number,nl_instruction,n_words_in_n_nl_instruction,action_type,graph,n_graph_nodes,n_graph_levels,human_rated_difficulty,sequential,hierarchical,cyclical
+1,find the red book in the bookcase,7,search,,,,,0,1,0
+2,search for the fork in the drawer,7,search,,,,,0,1,0
+3,find my keys,3,search,,,,,0,1,0
+4,fetch me the ripest apple on the shelf,8,search,,,,,0,1,0
+5,"stack the blocks in the following order: red, blue, yellow, green",11,assembly,,,,,0,1,0
+6,"stack the blocks in the following order: red, yellow, green, blue",11,assembly,,,,,0,1,0
+7,"stack the blocks in the following order: red, blue, purple, pink, green",12,assembly,,,,,0,1,0
+8,"stack the blocks in the following order: red, pink, yellow, green, blue, pink",13,assembly,,,,,0,1,0
+9,"alphabetize these five books: animals, zebras and you, apples, cherries and plums, tomatoes",13,sorting,,,,,0,1,0
+10,"alphabetize these five books: lassy, maribella, tanya, anya, lissa",9,sorting,,,,,0,1,0
+11,check for new amazon packages,5,monitor,,,,,0,0,1
+12,check the room down the hall for alpha contamination,9,search,,,,,0,0,1
+13,wait by the door until you see someone,8,monitor,,,,,0,0,1
+14,turn on the lights every morning,6,routine,,,,,0,0,1
+15,turn off the alarm clock every morning,7,routine,,,,,0,0,1
+16,set the alarm clock every night,6,routine,,,,,0,0,1
+17,let me know when my mom calls,7,monitor,,,,,0,0,1
+18,bring me some coffee every morning,6,routine,,,,,0,0,1
+19,when your battery is low return to the docking station,10,monitor,,,,,0,0,1
+20,open the door at noon every day,7,routine,,,,,0,0,1

@@ -1,0 +1,13 @@
+example_number,nl_instruction,n_words_in_n_nl_instruction,action_type,graph,n_graph_nodes,n_graph_levels,human_rated_difficulty,sequential,hierarchical,cyclical
+1,check the room down the hall for alpha contamination,9,search,,,,,1,0,0
+2,pick up this wrench and place it by the valve,10,object_manipulation,,,,,1,0,0
+3,hand me the screwdriver,4,object_manipulation,,,,,1,0,0
+4,place the screws in my hand,6,object_manipulation,,,,,1,0,0
+5,inspect all 4 rooms down this hallway,7,search,,,,,0,1,0
+6,find the nearest fire extinguisher,5,search,,,,,0,1,0
+7,find which glovebox has the screwdriver in it,8,search,,,,,0,1,0
+8,monitor for process fires,4,monitor,,,,,0,0,1
+9,return to your docking station every night,7,monitor,,,,,0,0,1
+10,upload the reports after this process is completed,8,misc.,,,,,1,0,0
+11,when your battery is low return to the docking station,10,monitor,,,,,0,0,1
+12,if an alarm sounds leave the room,7,monitor,,,,,0,0,1
