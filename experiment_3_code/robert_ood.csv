@@ -1,0 +1,629 @@
+file_name,nl_instruction,n_words_in_n_nl_instruction,action_type,graph,n_graph_nodes,n_graph_levels,human_rated_difficulty,sequential,hierarchical,cyclical
+1-Move-to-the-main-hall.umrfg.json,move to the main hall,5,navigation,"{
+        ""umrf_actions"": [
+        {
+            ""name"": ""Root"",
+            ""description"": ""Start with navigation"",
+            ""id"": 0,
+            ""children"": [
+                {
+                    ""name"": ""Navigate"",
+                    ""id"": 0
+                }
+            ]
+        },
+        {
+            ""name"": ""Navigate"",
+            ""description"": ""Move to the main hall"",
+            ""id"": 0,
+            ""parents"": [
+                {
+                    ""name"": ""Root"",
+                    ""id"": 0
+                }
+            ]
+        }
+    ]
+}",1,1,easy,1,0,0
+2-Go-to-the-workshop.umrfg.json,go to the workshop,4,navigation,"{
+    ""umrf_actions"": [
+        {
+            ""name"": ""Root"",
+            ""description"": ""Start with navigation"",
+            ""id"": 0,
+            ""children"": [
+                {
+                    ""name"": ""Navigate"",
+                    ""id"": 0
+                }
+            ]
+        },
+        {
+            ""name"": ""Navigate"",
+            ""description"": ""Go to the workshop"",
+            ""id"": 0,
+            ""parents"": [
+                {
+                    ""name"": ""Root"",
+                    ""id"": 0
+                }
+            ]
+        }
+    ]
+}",1,1,easy,1,0,0
+3-Go-to-the-workshop-wait-for-3-minutes.umrfg.json,"go to the workshop, timer for 3 minutes, and then come back to the headquarter.",15,navigation ,"{
+    ""umrf_actions"": [
+        {
+            ""name"": ""Root"",
+            ""description"": ""Start with navigation"",
+            ""id"": 0,
+            ""children"": [
+                {
+                    ""name"": ""Navigate"",
+                    ""id"": 0
+                }
+            ]
+        },
+        {
+            ""name"": ""Navigate"",
+            ""description"": ""Go to the workshop"",
+            ""id"": 0,
+            ""parents"": [
+                {
+                    ""name"": ""Root"",
+                    ""id"": 0
+                }
+            ],
+            ""children"": [
+                {
+                    ""name"": ""Timer"",
+                    ""id"": 0
+                }
+            ]
+        },
+        {
+            ""name"": ""Timer"",
+            ""description"": ""Then wait for 3 minutes"",
+            ""id"": 0,
+            ""parents"": [
+                {
+                    ""name"": ""Navigate"",
+                    ""id"": 0
+                }
+            ],
+            ""children"": [
+                {
+                    ""name"": ""Navigate"",
+                    ""id"": 1
+                }
+            ]
+        },
+        {
+          ""name"": ""Navigate"",
+          ""description"": ""After waiting, go back to the headquarter"",
+          ""id"": 1,
+          ""parents"": [
+              {
+                  ""name"": ""Timer"",
+                  ""id"": 0
+              }
+          ]
+      }
+    ]
+}",3,3,medium,1,1,1
+4-Navigate-to-the-lab.umrfg.json,navigate to the lab and video record while going there,10,navigation,"{
+    ""umrf_actions"": [
+        {
+            ""name"": ""Root"",
+            ""description"": ""Start with navigation and videorecording at the same time"",
+            ""id"": 0,
+            ""children"": [
+                {
+                    ""name"": ""Navigate"",
+                    ""id"": 0
+                },
+                {
+                    ""name"": ""RecordVideo"",
+                    ""id"": 0
+                }
+            ]
+        },
+        {
+            ""name"": ""Navigate"",
+            ""description"": ""Navigate to the lab. Pre-empt RecordVideo when finished"",
+            ""id"": 0,
+            ""parents"": [
+                {
+                    ""name"": ""Root"",
+                    ""id"": 0
+                }
+            ],
+            ""children"": [
+                {
+                    ""name"": ""RecordVideo"",
+                    ""id"": 0
+                }
+            ]
+        },
+        {
+            ""name"": ""RecordVideo"",
+            ""description"": ""Record video until pre-empted by Navigate_0"",
+            ""id"": 0,
+            ""parents"": [
+                {
+                    ""name"": ""Navigate"",
+                    ""id"": 0,
+                    ""stop_when_received"": true
+                },
+                {
+                    ""name"": ""Root"",
+                    ""id"": 0
+                }
+            ]
+        }
+    ]
+}",2,2,easy,1,0,0
+5-Scan-the-area-for-5-minutes.umrfg.json,scan the area for 5 minutes,6,survey,"{
+    ""umrf_actions"": [
+        {
+            ""name"": ""Root"",
+            ""description"": ""At the same time start recording, set the timer, and move the arm to pose1"",
+            ""id"": 0,
+            ""children"": [
+                {
+                    ""name"": ""RecordVideo"",
+                    ""id"": 0
+                },
+                {
+                    ""name"": ""Timer"",
+                    ""id"": 0
+                },
+                {
+                    ""name"": ""MoveArm"",
+                    ""id"": 0
+                }
+            ]
+        },
+        {
+            ""name"": ""Timer"",
+            ""description"": ""Count down from 5 minutes. Pre-empt RecordVideo, MoveArm_0, MoveArm_1 after timer reaches zero, finising the task"",
+            ""id"": 0,
+            ""parents"": [
+                {
+                    ""name"": ""Root"",
+                    ""id"": 0
+                }
+            ],
+            ""children"": [
+                {
+                    ""name"": ""RecordVideo"",
+                    ""id"": 0
+                },
+                {
+                    ""name"": ""MoveArm"",
+                    ""id"": 0
+                },
+                {
+                    ""name"": ""MoveArm"",
+                    ""id"": 1
+                }
+            ]
+        },
+        {
+            ""name"": ""RecordVideo"",
+            ""description"": ""Start recording a video until pre-empted by Timer"",
+            ""id"": 0,
+            ""parents"": [
+                {
+                    ""name"": ""Root"",
+                    ""id"": 0
+                },
+                {
+                    ""name"": ""Timer"",
+                    ""id"": 0,
+                    ""stop_when_received"": true
+                }
+            ]
+        },
+        {
+            ""name"": ""MoveArm"",
+            ""description"": ""Move to pose0 if not pre-empted by Timer. Forms a loop with MoveArm_1"",
+            ""id"": 0,
+            ""parents"": [
+                {
+                    ""name"": ""Root"",
+                    ""id"": 0
+                },
+                {
+                    ""name"": ""MoveArm"",
+                    ""id"": 1
+                },
+                {
+                    ""name"": ""Timer"",
+                    ""id"": 0,
+                    ""stop_when_received"": true
+                }
+            ],
+            ""children"": [
+                {
+                    ""name"": ""MoveArm"",
+                    ""id"": 1
+                }
+            ]
+        },
+        {
+            ""name"": ""MoveArm"",
+            ""description"": ""Move to pose1 if not pre-empted by Timer. Forms a loop with MoveArm_0"",
+            ""id"": 1,
+            ""parents"": [
+                {
+                    ""name"": ""Timer"",
+                    ""id"": 0,
+                    ""stop_when_received"": true
+                },
+                {
+                    ""name"": ""MoveArm"",
+                    ""id"": 0
+                }
+            ],
+            ""children"": [
+                {
+                    ""name"": ""MoveArm"",
+                    ""id"": 0
+                }
+            ]
+        }
+    ]
+}",4,4,medium,0,1,1
+6-Scan-the-area-until-it-is-clear.umrfg.json,scan the area until it is clear,7,survey,"{
+    ""umrf_actions"": [
+        {
+            ""name"": ""Root"",
+            ""description"": ""At the same time start recording, set up the event detector, and move the arm to pose1"",
+            ""id"": 0,
+            ""children"": [
+                {
+                    ""name"": ""RecordVideo"",
+                    ""id"": 0
+                },
+                {
+                    ""name"": ""DetectEvent"",
+                    ""id"": 0
+                },
+                {
+                    ""name"": ""MoveArm"",
+                    ""id"": 0
+                }
+            ]
+        },
+        {
+            ""name"": ""DetectEvent"",
+            ""description"": ""Detect the 'until clear' event, which finishes the task. Pre-empt RecordVideo, MoveArm_0, MoveArm_1 after the area is clear"",
+            ""id"": 0,
+            ""parents"": [
+                {
+                    ""name"": ""Root"",
+                    ""id"": 0
+                }
+            ],
+            ""children"": [
+                {
+                    ""name"": ""RecordVideo"",
+                    ""id"": 0
+                },
+                {
+                    ""name"": ""MoveArm"",
+                    ""id"": 0
+                },
+                {
+                    ""name"": ""MoveArm"",
+                    ""id"": 1
+                }
+            ]
+        },
+        {
+            ""name"": ""RecordVideo"",
+            ""description"": ""Recording a video until pre-empted by DetectEvent"",
+            ""id"": 0,
+            ""parents"": [
+                {
+                    ""name"": ""Root"",
+                    ""id"": 0
+                },
+                {
+                    ""name"": ""DetectEvent"",
+                    ""id"": 0,
+                    ""stop_when_received"": true
+                }
+            ]
+        },
+        {
+            ""name"": ""MoveArm"",
+            ""description"": ""Move to pose0 if not pre-empted by DetectEvent. Forms a loop with MoveArm_1"",
+            ""id"": 0,
+            ""parents"": [
+                {
+                    ""name"": ""Root"",
+                    ""id"": 0
+                },
+                {
+                    ""name"": ""MoveArm"",
+                    ""id"": 1
+                },
+                {
+                    ""name"": ""DetectEvent"",
+                    ""id"": 0,
+                    ""stop_when_received"": true
+                }
+            ],
+            ""children"": [
+                {
+                    ""name"": ""MoveArm"",
+                    ""id"": 1
+                }
+            ]
+        },
+        {
+            ""name"": ""MoveArm"",
+            ""description"": ""Move to pose1 if not pre-empted by DetectEvent. Forms a loop with MoveArm_0"",
+            ""id"": 1,
+            ""parents"": [
+                {
+                    ""name"": ""DetectEvent"",
+                    ""id"": 0,
+                    ""stop_when_received"": true
+                },
+                {
+                    ""name"": ""MoveArm"",
+                    ""id"": 0
+                }
+            ],
+            ""children"": [
+                {
+                    ""name"": ""MoveArm"",
+                    ""id"": 0
+                }
+            ]
+        }
+    ]
+}",4,4,hard,1,1,1
+7-Scan-the-area-until-it-is-clear.umrfg.json,go to the accident site and then scan the area until the fire is extinguished,15,survey,"{
+    ""umrf_actions"": [
+        {
+            ""name"": ""Root"",
+            ""description"": ""Start by first navigating to the accident site"",
+            ""id"": 0,
+            ""children"": [
+                {
+                    ""name"": ""Navigate"",
+                    ""id"": 0
+                }
+            ]
+        },
+        {
+            ""name"": ""Navigate"",
+            ""description"": ""Navigate to the accident site, then simultaneously start detecting the end of fire, recording, and move the arm to pose1"",
+            ""id"": 0,
+            ""parents"": [
+                {
+                    ""name"": ""Root"",
+                    ""id"": 0
+                }
+            ],
+            ""children"": [
+                {
+                    ""name"": ""DetectEvent"",
+                    ""id"": 0
+                },
+                {
+                    ""name"": ""RecordVideo"",
+                    ""id"": 0
+                },
+                {
+                    ""name"": ""MoveArm"",
+                    ""id"": 0
+                }
+            ]
+        },
+        {
+            ""name"": ""DetectEvent"",
+            ""description"": ""Detect the 'fire extinguished' event. When detected, pre-empt RecordVideo, MoveArm_0, MoveArm_1, thus finishing the task"",
+            ""id"": 0,
+            ""parents"": [
+                {
+                    ""name"": ""Navigate"",
+                    ""id"": 0
+                }
+            ],
+            ""children"": [
+                {
+                    ""name"": ""RecordVideo"",
+                    ""id"": 0
+                },
+                {
+                    ""name"": ""MoveArm"",
+                    ""id"": 0
+                },
+                {
+                    ""name"": ""MoveArm"",
+                    ""id"": 1
+                }
+            ]
+        },
+        {
+            ""name"": ""RecordVideo"",
+            ""description"": ""Start recording a video until pre-empted by DetectEvent"",
+            ""id"": 0,
+            ""parents"": [
+                {
+                    ""name"": ""Navigate"",
+                    ""id"": 0
+                },
+                {
+                    ""name"": ""DetectEvent"",
+                    ""id"": 0,
+                    ""stop_when_received"": true
+                }
+            ]
+        },
+        {
+            ""name"": ""MoveArm"",
+            ""description"": ""Move to pose0 if not pre-empted by DetectEvent. Forms a loop with MoveArm_1"",
+            ""id"": 0,
+            ""parents"": [
+                {
+                    ""name"": ""Navigate"",
+                    ""id"": 0
+                },
+                {
+                    ""name"": ""MoveArm"",
+                    ""id"": 1
+                },
+                {
+                    ""name"": ""DetectEvent"",
+                    ""id"": 0,
+                    ""stop_when_received"": true
+                }
+            ],
+            ""children"": [
+                {
+                    ""name"": ""MoveArm"",
+                    ""id"": 1
+                }
+            ]
+        },
+        {
+            ""name"": ""MoveArm"",
+            ""description"": ""Move to pose1 if not pre-empted by DetectEvent. Forms a loop with MoveArm_1"",
+            ""id"": 1,
+            ""parents"": [
+                {
+                    ""name"": ""DetectEvent"",
+                    ""id"": 0,
+                    ""stop_when_received"": true
+                },
+                {
+                    ""name"": ""MoveArm"",
+                    ""id"": 0
+                }
+            ],
+            ""children"": [
+                {
+                    ""name"": ""MoveArm"",
+                    ""id"": 0
+                }
+            ]
+        }
+    ]
+}",5,5,hard,1,1,1
+8-Move-the-arm-in-three-different-poses.umrfg.json,move the arm in three different poses and hold each pose for 15 seconds.,14,manipulation,"{
+    ""umrf_actions"": [
+        {
+            ""name"": ""Root"",
+            ""description"": ""Start with moving the arm to pose0"",
+            ""id"": 0,
+            ""children"": [
+                {
+                    ""name"": ""MoveArm"",
+                    ""id"": 0
+                }
+            ]
+        },
+        {
+            ""name"": ""MoveArm"",
+            ""description"": ""Move to pose0"",
+            ""id"": 0,
+            ""children"": [
+                {
+                    ""name"": ""Timer"",
+                    ""id"": 0
+                }
+            ],
+            ""parents"": [
+                {
+                    ""name"": ""Root"",
+                    ""id"": 0
+                }
+            ]
+        },
+        {
+            ""name"": ""Timer"",
+            ""description"": ""Wait for 15 seconds"",
+            ""id"": 0,
+            ""children"": [
+                {
+                    ""name"": ""MoveArm"",
+                    ""id"": 1
+                }
+            ],
+            ""parents"": [
+                {
+                    ""name"": ""MoveArm"",
+                    ""id"": 0
+                }
+            ]
+        },
+        {
+            ""name"": ""MoveArm"",
+            ""description"": ""Move to pose1"",
+            ""id"": 1,
+            ""children"": [
+                {
+                    ""name"": ""Timer"",
+                    ""id"": 1
+                }
+            ],
+            ""parents"": [
+                {
+                    ""name"": ""Timer"",
+                    ""id"": 0
+                }
+            ]
+        },
+        {
+            ""name"": ""Timer"",
+            ""description"": ""Wait for 15 seconds"",
+            ""id"": 1,
+            ""children"": [
+                {
+                    ""name"": ""MoveArm"",
+                    ""id"": 2
+                }
+            ],
+            ""parents"": [
+                {
+                    ""name"": ""MoveArm"",
+                    ""id"": 1
+                }
+            ]
+        },
+        {
+            ""name"": ""MoveArm"",
+            ""description"": ""Move to pose2"",
+            ""id"": 2,
+            ""children"": [
+                {
+                    ""name"": ""Timer"",
+                    ""id"": 2
+                }
+            ],
+            ""parents"": [
+                {
+                    ""name"": ""Timer"",
+                    ""id"": 1
+                }
+            ]
+        },
+        {
+            ""name"": ""Timer"",
+            ""description"": ""Wait for 15 seconds"",
+            ""id"": 2,
+            ""parents"": [
+                {
+                    ""name"": ""MoveArm"",
+                    ""id"": 0
+                }
+            ]
+        }
+    ]
+}",6,6,medium,1,0,1
