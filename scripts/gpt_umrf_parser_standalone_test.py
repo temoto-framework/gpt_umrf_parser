@@ -7,6 +7,9 @@ import sys
 import json 
 
 client = OpenAI(api_key = os.getenv('GPT_API_KEY'))
+# openai.api_key = os.getenv('GPT_API_KEY')
+
+# model_engine = "text-davinci-003"
 model_engine = "gpt-3.5-turbo"
 umrf_graph_samples = []
 

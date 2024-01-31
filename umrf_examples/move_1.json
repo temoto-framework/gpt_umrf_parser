@@ -2,7 +2,8 @@
     "graph_name": "Move to the main hall [x=14; y=3.2; yaw=1.26].",
     "umrf_actions": [
         {
-            "name": "navigate",
+            "name": "TaNavigate",
+            "package_name": "ta_navigate",
             "effect": "synchronous",
             "input_parameters": {
                 "location_name": {

@@ -2,7 +2,8 @@
     "graph_name": "Scan the area",
     "umrf_actions": [
         {
-            "name": "move_arm",
+            "name": "TaMoveArm",
+            "package_name": "ta_move_arm",
             "id": 0,
             "effect": "synchronous",
             "input_parameters": {
@@ -10,53 +11,56 @@
                     "orientation": {
                         "w": {
                             "pvf_type": "number",
-                            "pvf_value": 1
+                            "pvf_value": 0.965
                         },
                         "x": {
                             "pvf_type": "number",
-                            "pvf_value": 0
+                            "pvf_value": 0.054
                         },
                         "y": {
                             "pvf_type": "number",
-                            "pvf_value": 0
+                            "pvf_value": -0.054
                         },
                         "z": {
                             "pvf_type": "number",
-                            "pvf_value": 0
+                            "pvf_value": -0.316
                         }
                     },
                     "position": {
                         "x": {
                             "pvf_type": "number",
-                            "pvf_value": 0.03
+                            "pvf_value": 0.751
                         },
                         "y": {
                             "pvf_type": "number",
-                            "pvf_value": 0.54
+                            "pvf_value": -0.586
                         },
                         "z": {
                             "pvf_type": "number",
-                            "pvf_value": 0.03
+                            "pvf_value": 0.782
                         }
                     }
                 }
             },
             "children": [
                 {
-                    "name": "take_picture",
+                    "name": "TaTakePicture",
                     "id": 0
                 }
             ]
         },
         {
-            "name": "take_picture",
+            "name": "TaTakePicture",
+            "package_name": "ta_take_picture",
             "description": "scan",
             "id": 0,
             "effect": "synchronous",
             "parents": [
                 {
                     "name": "move_arm",
-                    "id": 0
+                    "id": 0,
+                    "required": true,
+                    "stop_when_received": false
                 }
             ]
         }

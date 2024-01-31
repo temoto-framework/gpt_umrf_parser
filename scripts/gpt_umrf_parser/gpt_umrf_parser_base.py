@@ -1,6 +1,7 @@
 import os
 import openai
 import json
+from openai import OpenAI
 
 class GptConfig:
 		def __init__ (self, api_key, engine, logprobs, max_tokens):
@@ -13,20 +14,22 @@ class GptUmrfParser:
 		def __init__(self, gpt_config, examples):
 				self.gpt_config = gpt_config
 				openai.api_key = self.gpt_config.api_key
+				self.client = OpenAI(api_key = os.getenv('GPT_API_KEY'))
 				self.examples = examples
 
 		def generate(self, prompt_in):
-				completion = openai.Completion.create(
-						engine = self.gpt_config.engine,
-						max_tokens = self.gpt_config.max_tokens,
+				completion = self.client.chat.completions.create(
+						model=self.gpt_config.engine,
+						messages=[
+							{"role": "user", "content": prompt_in}
+						],
+						max_tokens=self.gpt_config.max_tokens,
 						logprobs = self.gpt_config.logprobs,
-						temperature = 0.5,
-						n = 1,
-						stop = None,
-						prompt = prompt_in
+						temperature=0.5,
+						n=1,
+						stop=None
 				)
-
-				output_text = completion.choices[0].text
+				output_text = completion.choices[0].message.content.strip()
 				output_raw = completion
 				return output_text, output_raw
 

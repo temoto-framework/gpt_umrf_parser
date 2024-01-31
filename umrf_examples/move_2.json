@@ -2,7 +2,8 @@
     "graph_name": "Go to the workshop [x=-33.9; y=12.1; yaw=0.04].",
     "umrf_actions": [
         {
-            "name": "navigate",
+            "name": "TaNavigate",
+            "package_name": "ta_navigate",
             "effect": "synchronous",
             "input_parameters": {
                 "location_name": {

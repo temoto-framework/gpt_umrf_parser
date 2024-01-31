@@ -74,7 +74,7 @@ if __name__ == '__main__':
     examples = gpt.read_sample_jsons(args.umrf_examples)
     gpt_config = gpt.GptConfig(
         api_key = os.getenv('GPT_API_KEY'),
-        engine = "text-davinci-003",
+        engine = "gpt-3.5-turbo",
         logprobs = None,
         max_tokens = 1024
     )

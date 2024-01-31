@@ -2,7 +2,8 @@
     "graph_name": "robot go observe the valve [x=-93.6; y=11.0; yaw=-0.85]",
     "umrf_actions": [
           {
-            "name": "navigate",
+            "name": "TaNavigate",
+            "package_name": "ta_navigate",
             "description": "go",
             "id": 0,
             "effect": "synchronous",
@@ -14,27 +15,28 @@
                 "pose_2d": {
                     "x": {
                         "pvf_type": "number",
-                        "pvf_value": -93.6
+                        "pvf_value": 2.0
                     },
                     "y": {
                         "pvf_type": "number",
-                        "pvf_value": 11.0
+                        "pvf_value": 0.0
                     },
                     "yaw": {
                         "pvf_type": "number",
-                        "pvf_value": -0.85
+                        "pvf_value": 0.0
                     }
                 }
             },
             "children": [
                 {
-                    "name": "move_arm",
+                    "name": "TaMoveArm",
                     "id": 0
                 }
             ]
         },
         {
-            "name": "move_arm",
+            "name": "TaMoveArm",
+            "package_name": "ta_move_arm",
             "description": "observe",
             "id": 0,
             "effect": "synchronous",
@@ -43,70 +45,76 @@
                     "orientation": {
                         "w": {
                             "pvf_type": "number",
-                            "pvf_value": 0.54
+                            "pvf_value": 0.912
                         },
                         "x": {
                             "pvf_type": "number",
-                            "pvf_value": 0.2
+                            "pvf_value": 0.070
                         },
                         "y": {
                             "pvf_type": "number",
-                            "pvf_value": 0.33
+                            "pvf_value": -0.040
                         },
                         "z": {
                             "pvf_type": "number",
-                            "pvf_value": -0.1
+                            "pvf_value": 0.403
                         }
                     },
                     "position": {
                         "x": {
                             "pvf_type": "number",
-                            "pvf_value": 0.2
+                            "pvf_value": 0.714
                         },
                         "y": {
                             "pvf_type": "number",
-                            "pvf_value": 0.54
+                            "pvf_value": -0.266
                         },
                         "z": {
                             "pvf_type": "number",
-                            "pvf_value": 0.32
+                            "pvf_value": 0.851
                         }
                     }
                 }
             },
             "children": [
                 {
-                    "name": "take_picture",
+                    "name": "TaTakePicture",
                     "id": 0
                 }
             ],
             "parents": [
                 {
-                    "name": "navigate",
-                    "id": 0
+                    "name": "TaNavigate",
+                    "id": 0,
+                    "required": true,
+                    "stop_when_received": false
                 }
             ]
         },
         {
-            "name": "take_picture",
+            "name": "TaTakePicture",
+            "package_name": "ta_take_picture",
             "description": "observe",
             "id": 0,
             "effect": "synchronous",
             "children": [
                 {
-                    "name": "move_arm",
+                    "name": "TaMoveArm",
                     "id": 1
                 }
             ],
             "parents": [
                 {
-                    "name": "move_arm",
-                    "id": 0
+                    "name": "TaMoveArm",
+                    "id": 0,
+                    "required": true,
+                    "stop_when_received": false
                 }
             ]
         },
         {
-            "name": "move_arm",
+            "name": "TaMoveArm",
+            "package_name": "ta_move_arm",
             "description": "observe",
             "id": 1,
             "effect": "synchronous",
@@ -115,59 +123,64 @@
                     "orientation": {
                         "w": {
                             "pvf_type": "number",
-                            "pvf_value": 1.0
+                            "pvf_value": 0.965
                         },
                         "x": {
                             "pvf_type": "number",
-                            "pvf_value": 0.0
+                            "pvf_value": 0.054
                         },
                         "y": {
                             "pvf_type": "number",
-                            "pvf_value": 0.0
+                            "pvf_value": -0.054
                         },
                         "z": {
                             "pvf_type": "number",
-                            "pvf_value": 0.0
+                            "pvf_value": -0.316
                         }
                     },
                     "position": {
                         "x": {
                             "pvf_type": "number",
-                            "pvf_value": 0.2
+                            "pvf_value": 0.751
                         },
                         "y": {
                             "pvf_type": "number",
-                            "pvf_value": 0.0
+                            "pvf_value": -0.586
                         },
                         "z": {
                             "pvf_type": "number",
-                            "pvf_value": 0.32
+                            "pvf_value": 0.782
                         }
                     }
                 }
             },
             "children": [
                 {
-                    "name": "take_picture",
+                    "name": "TaTakePicture",
                     "id": 1
                 }
             ],
             "parents": [
                 {
-                    "name": "take_picture",
-                    "id": 0
+                    "name": "TaTakePicture",
+                    "id": 0,
+                    "required": true,
+                    "stop_when_received": false
                 }
             ]
         },
         {
-            "name": "take_picture",
+            "name": "TaTakePicture",
+            "package_name": "ta_take_picture",
             "description": "observe",
             "id": 1,
             "effect": "synchronous",
             "parents": [
                 {
-                    "name": "move_arm",
-                    "id": 1
+                    "name": "TaMoveArm",
+                    "id": 1,
+                    "required": true,
+                    "stop_when_received": false
                 }
             ]
         }

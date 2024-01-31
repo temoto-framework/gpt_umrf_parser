@@ -1,0 +1,74 @@
+"pose_quat": {
+    "orientation": {
+        "w": {
+            "pvf_type": "number",
+            "pvf_value": 0.912
+        },
+        "x": {
+            "pvf_type": "number",
+            "pvf_value": 0.070
+        },
+        "y": {
+            "pvf_type": "number",
+            "pvf_value": -0.040
+        },
+        "z": {
+            "pvf_type": "number",
+            "pvf_value": 0.403
+        }
+    },
+    "position": {
+        "x": {
+            "pvf_type": "number",
+            "pvf_value": 0.714
+        },
+        "y": {
+            "pvf_type": "number",
+            "pvf_value": -0.266
+        },
+        "z": {
+            "pvf_type": "number",
+            "pvf_value": 0.851
+        }
+    }
+}
+
+
+
+
+
+
+"pose_quat": {
+    "orientation": {
+        "w": {
+            "pvf_type": "number",
+            "pvf_value": 0.965
+        },
+        "x": {
+            "pvf_type": "number",
+            "pvf_value": 0.054
+        },
+        "y": {
+            "pvf_type": "number",
+            "pvf_value": -0.054
+        },
+        "z": {
+            "pvf_type": "number",
+            "pvf_value": -0.316
+        }
+    },
+    "position": {
+        "x": {
+            "pvf_type": "number",
+            "pvf_value": 0.751
+        },
+        "y": {
+            "pvf_type": "number",
+            "pvf_value": -0.586
+        },
+        "z": {
+            "pvf_type": "number",
+            "pvf_value": 0.782
+        }
+    }
+}
