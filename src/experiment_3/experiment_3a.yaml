@@ -1,0 +1,19 @@
+id_dataset_file_name: "exp_1_id_alfred.csv"
+
+### Valid OOD test sets:
+# + exp_3 robert_ood.csv
+ood_dataset_file_name: "robert_ood.csv"
+
+### Valid model_ids:
+# + Llama-2-7b-hf
+# + CodeLlama-7b-Instruct-hf
+# + Mistral-7B-Instruct-v0.2
+# + gpt-4
+# + gpt-3.5-turbo-instruct
+model_id: "CodeLlama-7b-Instruct-hf"
+
+# train-test-split
+num_train_exs: 5
+
+# Where to save .csv file of results (includes decoded outputs and BLEU scores)
+exp_dir: "experiment_3/"

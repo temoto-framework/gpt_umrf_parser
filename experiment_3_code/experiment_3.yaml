@@ -1,6 +1,0 @@
-#Infos
-dataset_dir_path: "/home/selmawanna/PycharmProjects/robotics_adv_robo_2024/datasets/"
-id_dataset_file_name: "newest_id_alfred.csv"
-ood_file_name: "robert_ood.csv"
-
-output_dir_path: "/home/selmawanna/PycharmProjects/robotics_adv_robo_2024/generated_outputs_1024/"

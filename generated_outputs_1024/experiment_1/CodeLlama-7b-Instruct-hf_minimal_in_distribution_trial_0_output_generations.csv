@@ -1,0 +1,304 @@
+,file_name,nl_instruction,fully_assembled_prompts,n_words_in_n_nl_instruction,action_type,graph,n_graph_nodes,n_graph_levels,human_rated_difficulty,sequential,hierarchical,cyclical,prediction,bleu_score
+0,umrf_graph_46.umrfg.json,pick up the knife on the counter.,"### Natural Language Instruction: 
+put the CD on the right side of the front part of the dresser + x: -7.16, y: -5.286, yaw: -9.836
+### JSON format: 
+{
+    ""umrf_actions"": [
+        {
+            ""name"": ""TaPlace"",
+            ""package_name"": ""ta_place"",
+            ""description"": ""put the CD on the right side of the front part of the dresser"",
+            ""id"": 0,
+            ""effect"": ""synchronous"",
+            ""input_parameters"": {
+                ""locale"": {
+                    ""pvf_type"": ""string"",
+                    ""pvf_example"": ""on the right side of the front part of the dresser""
+                },
+                ""object"": {
+                    ""pvf_type"": ""string"",
+                    ""pvf_example"": ""CD""
+                },
+                ""verb"": {
+                    ""pvf_type"": ""string"",
+                    ""pvf_example"": ""put""
+                },
+                ""pose_2d"": {
+                    ""x"": {
+                        ""pvf_type"": ""number"",
+                        ""pvf_value"": -7.16
+                    },
+                    ""y"": {
+                        ""pvf_type"": ""number"",
+                        ""pvf_value"": -5.286
+                    },
+                    ""yaw"": {
+                        ""pvf_type"": ""number"",
+                        ""pvf_value"": -9.836
+                    }
+                }
+            }
+        }
+    ]
+}### Natural Language Instruction: 
+place a clock on a desk + x: -35.89, y: -4.04, yaw: -3.443
+### JSON format: 
+{
+    ""umrf_actions"": [
+        {
+            ""name"": ""TaPlace"",
+            ""package_name"": ""ta_place"",
+            ""description"": ""Place a clock on a desk"",
+            ""id"": 0,
+            ""effect"": ""synchronous"",
+            ""input_parameters"": {
+                ""locale"": {
+                    ""pvf_type"": ""string"",
+                    ""pvf_example"": ""on a desk""
+                },
+                ""object"": {
+                    ""pvf_type"": ""string"",
+                    ""pvf_example"": ""clock""
+                },
+                ""verb"": {
+                    ""pvf_type"": ""string"",
+                    ""pvf_example"": ""Place""
+                },
+                ""pose_2d"": {
+                    ""x"": {
+                        ""pvf_type"": ""number"",
+                        ""pvf_value"": -35.89
+                    },
+                    ""y"": {
+                        ""pvf_type"": ""number"",
+                        ""pvf_value"": -4.04
+                    },
+                    ""yaw"": {
+                        ""pvf_type"": ""number"",
+                        ""pvf_value"": -3.443
+                    }
+                }
+            }
+        }
+    ]
+}### Natural Language Instruction: 
+turn right, walk to the dresser + x: 9.034, y: 8.214, yaw: 0.022
+### JSON format: 
+{
+    ""umrf_actions"": [
+        {
+            ""name"": ""TaMoveRobot"",
+            ""package_name"": ""ta_move_robot"",
+            ""description"": ""turn right"",
+            ""id"": 0,
+            ""effect"": ""synchronous"",
+            ""input_parameters"": {
+                ""direction"": {
+                    ""pvf_type"": ""string"",
+                    ""pvf_example"": ""right""
+                },
+                ""verb"": {
+                    ""pvf_type"": ""string"",
+                    ""pvf_example"": ""turn""
+                }
+            },
+            ""children"": [
+                {
+                    ""name"": ""TaNavigateRobot"",
+                    ""id"": 0
+                }
+            ]
+        },
+        {
+            ""name"": ""TaNavigateRobot"",
+            ""package_name"": ""ta_navigate_robot"",
+            ""description"": ""walk to the dresser"",
+            ""id"": 0,
+            ""effect"": ""synchronous"",
+            ""input_parameters"": {
+                ""location"": {
+                    ""pvf_type"": ""string"",
+                    ""pvf_example"": ""the dresser""
+                },
+                ""verb"": {
+                    ""pvf_type"": ""string"",
+                    ""pvf_example"": ""walk to""
+                },
+                ""pose_2d"": {
+                    ""x"": {
+                        ""pvf_type"": ""number"",
+                        ""pvf_value"": 9.034
+                    },
+                    ""y"": {
+                        ""pvf_type"": ""number"",
+                        ""pvf_value"": 8.214
+                    },
+                    ""yaw"": {
+                        ""pvf_type"": ""number"",
+                        ""pvf_value"": 0.022
+                    }
+                }
+            },
+            ""parents"": [
+                {
+                    ""name"": ""TaMoveRobot"",
+                    ""id"": 0,
+                    ""required"": true
+                }
+            ]
+        }
+    ]
+}### Natural Language Instruction: 
+pick up the knife on the counter. + x: -1.50, y: -2.96, yaw: -8.83
+### JSON format: 
+",7,object_manipulation,"{
+    ""umrf_actions"": [
+        {
+            ""name"": ""TaPickup"",
+            ""package_name"": ""ta_pickup"",
+            ""description"": ""Pick up the knife on the counter."",
+            ""id"": 0,
+            ""effect"": ""synchronous"",
+            ""input_parameters"": {
+                ""locale"": {
+                    ""pvf_type"": ""string"",
+                    ""pvf_example"": ""on the counter""
+                },
+                ""object"": {
+                    ""pvf_type"": ""string"",
+                    ""pvf_example"": ""knife""
+                },
+                ""verb"": {
+                    ""pvf_type"": ""string"",
+                    ""pvf_example"": ""Pick up""
+                },
+                ""pose_2d"": {
+                    ""x"": {
+                        ""pvf_type"": ""number"",
+                        ""pvf_value"": -1.50
+                    },
+                    ""y"": {
+                        ""pvf_type"": ""number"",
+                        ""pvf_value"": -2.96
+                    },
+                    ""yaw"": {
+                        ""pvf_type"": ""number"",
+                        ""pvf_value"": -8.83
+                    }
+                }
+            }
+        }
+    ]
+}",1,1,easy,1,0,0,"{
+    ""umrf_actions"": [
+        {
+            ""name"": ""TaPickupObject"",
+            ""package_name"": ""ta_pickup_object"",
+            ""description"": ""pick up the knife on the counter"",
+            ""id"": 0,
+            ""effect"": ""synchronous"",
+            ""input_parameters"": {
+                ""locale"": {
+                    ""pvf_type"": ""string"",
+                    ""pvf_example"": ""on the counter""
+                },
+                ""object"": {
+                    ""pvf_type"": ""string"",
+                    ""pvf_example"": ""knife""
+                },
+                ""verb"": {
+                    ""pvf_type"": ""string"",
+                    ""pvf_example"": ""pick up""
+                },
+                ""pose_2d"": {
+                    ""x"": {
+                        ""pvf_type"": ""number"",
+                        ""pvf_value"": -1.50
+                    },
+                    ""y"": {
+                        ""pvf_type"": ""number"",
+                        ""pvf_value"": -2.96
+                    },
+                    ""yaw"": {
+                        ""pvf_type"": ""number"",
+                        ""pvf_value"": -8.83
+                    }
+                }
+            }
+        }
+    ]
+}### Natural Language Instruction: 
+put the knife on the table. + x: -1.50, y: -2.96, yaw: -8.83
+### JSON format: 
+{
+    ""umrf_actions"": [
+        {
+            ""name"": ""TaPlace"",
+            ""package_name"": ""ta_place"",
+            ""description"": ""put the knife on the table"",
+            ""id"": 0,
+            ""effect"": ""synchronous"",
+            ""input_parameters"": {
+                ""locale"": {
+                    ""pvf_type"": ""string"",
+                    ""pvf_example"": ""on the table""
+                },
+                ""object"": {
+                    ""pvf_type"": ""string"",
+                    ""pvf_example"": ""knife""
+                },
+                ""verb"": {
+                    ""pvf_type"": ""string"",
+                    ""pvf_example"": ""put""
+                },
+                ""pose_2d"": {
+                    ""x"": {
+                        ""pvf_type"": ""number"",
+                        ""pvf_value"": -1.50
+                    },
+                    ""y"": {
+                        ""pvf_type"": ""number"",
+                        ""pvf_value"": -2.96
+                    },
+                    ""yaw"": {
+                        ""pvf_type"": ""number"",
+                        ""pvf_value"": -8.83
+                    }
+                }
+            }
+        }
+    ]
+}### Natural Language Instruction: 
+put the knife on the table. + x: -1.50, y: -2.96, yaw: -8.83
+### JSON format: 
+{
+    ""umrf_actions"": [
+        {
+            ""name"": ""TaPlace"",
+            ""package_name"": ""ta_place"",
+            ""description"": ""put the knife on the table"",
+            ""id"": 0,
+            ""effect"": ""synchronous"",
+            ""input_parameters"": {
+                ""locale"": {
+                    ""pvf_type"": ""string"",
+                    ""pvf_example"": ""on the table""
+                },
+                ""object"": {
+                    ""pvf_type"": ""string"",
+                    ""pvf_example"": ""knife""
+                },
+                ""verb"": {
+                    ""pvf_type"": ""string"",
+                    ""pvf_example"": ""put""
+                },
+                ""pose_2d"": {
+                    ""x"": {
+                        ""pvf_type"": ""number"",
+                        ""pvf_value"": -1.50
+                    },
+                    ""y"": {
+                        ""pvf_type"": ""number"",
+                        ""pvf_value"": -2.96
+                    },
+",0.3016546051102138

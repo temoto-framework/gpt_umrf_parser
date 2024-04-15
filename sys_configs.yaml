@@ -1,0 +1,11 @@
+dataset_dir_path: "/vast/home/slwanna/git_repos/gpt_umrf_parser_cleanup/gpt_umrf_parser/datasets/"
+model_dir_path: "/vast/home/slwanna/git_clone_huggingface_models/"
+output_dir_path: "/vast/home/slwanna/git_repos/gpt_umrf_parser_cleanup/gpt_umrf_parser/generated_outputs_1024/"
+
+### Valid OOD test config files:
+# + exp_1: /vast/home/slwanna/git_repos/gpt_umrf_parser_cleanup/gpt_umrf_parser/src/experiment_1/experiment_1_configs.yaml
+# + exp_2: /vast/home/slwanna/git_repos/gpt_umrf_parser_cleanup/gpt_umrf_parser/src/experiment_2/experiment_2_configs.yaml
+# + exp_3: /vast/home/slwanna/git_repos/gpt_umrf_parser_cleanup/gpt_umrf_parser/src/experiment_2/experiment_3a.yaml
+# + exp_3: /vast/home/slwanna/git_repos/gpt_umrf_parser_cleanup/gpt_umrf_parser/src/experiment_2/experiment_3b.yaml
+# + exp_3: /vast/home/slwanna/git_repos/gpt_umrf_parser_cleanup/gpt_umrf_parser/src/experiment_2/experiment_3c.yaml
+experiment_config_path: /vast/home/slwanna/git_repos/gpt_umrf_parser_cleanup/gpt_umrf_parser/src/experiment_3/experiment_3b.yaml

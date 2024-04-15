@@ -1,0 +1,8 @@
+name: prompt_experiments
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python==3.10
+  - cudatoolkit
+  - nb_conda_kernels
