@@ -23,7 +23,11 @@ from src.helper import get_instruction_template
 
 # Below function is necessary for OpenAI API queries
 def completions_with_backoff(**kwargs):
-    return client.completions.create(**kwargs)
+    model_name = kwargs["model"]
+    if "gpt-3.5-turbo-instruct" in model_name:
+        return client.completions.create(**kwargs)
+    elif "gpt-4" in model_name:
+        return client.chat.completions.create(**kwargs)
 
 
 if __name__ == '__main__':
