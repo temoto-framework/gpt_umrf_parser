@@ -1,7 +1,16 @@
 # gpt_umrf_parser
-GPT-based natural language to UMRF parser
+GPT-based natural language to UMRF parser. This package contains the code for replicating the code in the journal paper:
 
-## Setup
+Unlocking Underrepresented Use-Cases for Large Language Model-Driven Human-Robot Task Planning.
+
+The repository is broken into three main branches:
+* main - provides quick and simple scripts for querying OpenAI API with natural language for UMRF task and motion planning.
+* selma-devel - provides the datasets, LLM code for huggingface API and OpenAI API, and prompt builder to perform the prompt experiments in Section 3.
+* demo_test - provides the ROS code to perform the remote inspection demonstration in Section 5.
+
+Please refer to each branch's README.md file for full setup instructions.
+
+## Main Branch Setup
 * OpenAI API requires Numpy `v1.20.3` or higher, so if that's not the case then: `sudo pip install numpy --upgrade` 
 * Install openai python package: `pip install openai`.
 * [Generate a key](https://beta.openai.com/account/api-keys) for using openai API.
